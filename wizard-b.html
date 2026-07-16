@@ -195,6 +195,29 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .hyg-title{font-size:13px;font-weight:500;color:#1c1c1a;margin-bottom:2px}
 .hyg-desc{font-size:11px;color:#98978f;line-height:1.5}
 
+/* ── Gmail inbox mock (S0) ── */
+.gm-bar{display:flex;align-items:center;gap:16px;padding:10px 20px;background:#fff;border-bottom:1px solid #e8eaed}
+.gm-menu{display:flex;flex-direction:column;gap:3px}
+.gm-menu span{display:block;width:16px;height:2px;background:#5f6368;border-radius:1px}
+.gm-logo{font-size:20px;color:#5f6368;font-weight:500}
+.gm-search{flex:1;max-width:540px;background:#eaf1fb;border-radius:24px;padding:9px 18px;font-size:13px;color:#5f6368}
+.gm-avatar{width:30px;height:30px;border-radius:50%;background:#8e24aa;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;margin-left:auto}
+.gm-subject-row{display:flex;align-items:center;gap:12px;padding:22px 26px 4px}
+.gm-subject{font-size:20px;color:#1f1f1f}
+.gm-chip{font-size:11px;color:#5f6368;background:#e8eaed;border-radius:4px;padding:3px 8px}
+.gm-sender{display:flex;align-items:flex-start;gap:12px;padding:16px 26px 6px}
+.gm-s-avatar{width:38px;height:38px;border-radius:50%;background:#1c1c1a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;flex-shrink:0}
+.gm-s-name{font-size:13px;font-weight:600;color:#1f1f1f}
+.gm-s-email{font-size:12px;color:#5f6368}
+.gm-to{font-size:12px;color:#5f6368;margin-top:1px}
+.gm-meta{margin-left:auto;display:flex;align-items:center;gap:16px;font-size:12px;color:#5f6368;white-space:nowrap;padding-top:2px}
+.gm-replies{display:flex;gap:10px;padding:14px 26px 26px}
+.gm-rbtn{border:1px solid #d0cfc8;border-radius:18px;padding:8px 20px;font-size:13px;color:#444746;background:#fff}
+
+/* ── Browser chrome (webpage screens) ── */
+.b-chrome{background:#f7f6f2;border-bottom:1px solid #e4e3dd;padding:10px 18px;display:flex;align-items:center;gap:12px}
+.b-url{flex:1;max-width:440px;background:#fff;border:1px solid #e4e3dd;border-radius:16px;padding:6px 14px;font-size:12px;color:#58584f}
+
 /* Email */
 .e-chrome{background:#f7f6f2;border-bottom:1px solid #e4e3dd;padding:10px 18px;display:flex;align-items:center;gap:10px}
 .edots{display:flex;gap:5px}
@@ -241,22 +264,35 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 <body>
 <div class="app"><div class="card">
 
-<!-- S0: PHASE I — Email -->
+<!-- S0: PHASE I — Email in Gmail inbox -->
 <div class="screen active" id="s0">
-  <div class="e-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="efrom">From: <span><span class="em" data-u="alice" data-d="email.com"></span></span></div></div>
-  <div class="e-subject"><div class="e-subject-line">Alice, a new passkey was added to your account</div><div class="e-subject-meta">To: <span class="em" data-u="alice" data-d="email.com"></span> · Mar 19, 2026 at 2:34 PM</div></div>
-  <div class="e-header"><div class="e-logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="e-sender"><span class="em" data-u="alice" data-d="email.com"></span></div></div>
+  <div class="gm-bar">
+    <div class="gm-menu"><span></span><span></span><span></span></div>
+    <div class="gm-logo">Gmail</div>
+    <div class="gm-search">Search mail</div>
+    <div class="gm-avatar">A</div>
+  </div>
+  <div class="gm-subject-row">
+    <div class="gm-subject">A new passkey was added to your account</div>
+    <div class="gm-chip">Inbox</div>
+  </div>
+  <div class="gm-sender">
+    <div class="gm-s-avatar">N</div>
+    <div>
+      <div><span class="gm-s-name">Noogle</span> <span class="gm-s-email">&lt;account@noogle.com&gt;</span></div>
+      <div class="gm-to">to me ▾</div>
+    </div>
+    <div class="gm-meta"><span>Mar 19, 2026, 2:34 PM (4 hours ago)</span><span>☆</span><span>↩</span><span>⋮</span></div>
+  </div>
   <div class="e-alert"><div class="e-alert-icon">!</div><div class="e-alert-title">A new passkey was added to your account</div></div>
   <div class="e-content">
-    <div class="e-greeting">Hi Alice,</div>
-    <div class="e-body">A new passkey was added to your account. A passkey is a sign-in method that allows someone to access your account from a specific device without using a password.</div>
+    <div class="e-body">A new passkey was added to your account. A passkey is a passwordless sign-in method that allows sign-in to your account without using the password.</div>
     <div class="e-card">
       <div><div class="e-dlabel">When</div><div class="e-dvalue">Mar 19, 2026 · 2:34 PM</div></div>
       <div><div class="e-dlabel">Device</div><div class="e-dvalue">Android · Chrome</div></div>
       <div><div class="e-dlabel">Passkey manager</div><div class="e-dvalue">Google Password Manager</div></div>
       <div><div class="e-dlabel">Location</div><div class="e-dvalue">New York, NY</div></div>
     </div>
-    <div class="e-notice"><strong>What this means:</strong> whoever added this passkey can sign into your account without a password. If it wasn't you, review your account to secure it.</div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
       <button class="btn" onclick="go('s1-confirmed')">This was me — I confirm</button>
       <button class="btn" onclick="go('s2-diag')">I don't recognise this — let's investigate →</button>
@@ -271,11 +307,13 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </ol>
     </div>
   </div>
-  <div class="e-footer"><div class="e-footer-domain"><span class="em" data-u="alice" data-d="email.com"></span></div><div class="e-footer-text">Security alerts are enabled<br>on your account.</div></div>
+  <div class="e-footer"><div class="e-footer-domain">noogle.com</div><div class="e-footer-text">Security alerts are enabled<br>on your account.</div></div>
+  <div class="gm-replies"><div class="gm-rbtn">↩ Reply</div><div class="gm-rbtn">↪ Forward</div></div>
 </div>
 
 <!-- S1a: Confirmed -->
 <div class="screen" id="s1-confirmed">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Done</div></div>
   <div class="outcome"><div class="o-icon dark">✓</div><div class="o-title">Thank you for confirming</div><div class="o-text">We've noted that this activity was yours. No further action is needed.</div><button class="btn" style="max-width:280px" onclick="Study.finish('confirmed_it_was_me')">Go to security settings →</button><div class="o-note">If you change your mind, you can return to this wizard from your account security settings.</div></div>
@@ -283,6 +321,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S1b: PHASE II — Intro -->
 <div class="screen" id="s1-intro">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Getting started</div><div class="ptrack"><div class="pfill" style="width:8%"></div></div><div class="pstep">Intro</div></div>
   <div style="padding:24px 22px 20px;border-bottom:1px solid #e4e3dd">
@@ -311,6 +350,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S2: PHASE II — Diagnosis -->
 <div class="screen" id="s2-diag">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Step 1 of 3</div><div class="ptrack"><div class="pfill" style="width:33%"></div></div><div class="pstep">Confirm activity</div></div>
   <div class="page-header"><div class="step-tag">Step 1 — Confirm activity</div><div class="page-title">Did you add this passkey?</div><div class="page-sub">Review the details and tell us if you recognise this.</div></div>
@@ -318,8 +358,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="attr-grid">
       <div class="attr-row"><div class="ak">Action</div><div class="av">Passkey added</div></div>
       <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager</div></div>
-      <div class="attr-row"><div class="ak">Last used</div><div class="av">Mar 19, 2026 · 5:00 PM</div></div>
       <div class="attr-row"><div class="ak">When</div><div class="av">Mar 19, 2026 · 2:34 PM · EST</div></div>
+      <div class="attr-row"><div class="ak">Last used</div><div class="av">Mar 19, 2026 · 5:00 PM</div></div>
       <div class="attr-row"><div class="ak">Device</div><div class="av">Google Pixel · Android · Chrome</div></div>
       <div class="attr-row"><div class="ak">Where &amp; how <span class="attr-shdr-icon">i</span></div><div class="av">New York, NY · 192.168.0.1</div></div>
     </div>
@@ -341,6 +381,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- Outcome A: keep -->
 <div class="screen" id="s2-keep">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Confirmed</div></div>
   <div class="outcome"><div class="o-icon dark">✓</div><div class="o-title">Thank you for confirming</div><div class="o-text">We've noted that this activity was yours and that you want to keep the passkey. No further action is needed.</div><button class="btn" style="max-width:280px" onclick="Study.finish('confirmed_keep_passkey')">Go to security settings →</button></div>
@@ -348,6 +389,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- Outcome B: remove -->
 <div class="screen" id="s2-remove">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Confirmed</div></div>
   <div class="outcome"><div class="o-icon dark">✓</div><div class="o-title">Understood — let's remove it</div><div class="o-text">Since you added this passkey but no longer want it, we can take you to your passkey settings where you can remove it directly.</div><button class="btn" style="max-width:280px;margin-bottom:8px" onclick="Study.finish('exit_to_passkey_settings')">Go to passkey settings →</button><span class="o-link" onclick="go('s3-review')">Or continue to full account review →</span></div>
@@ -355,9 +397,10 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S3: PHASE III — Activity review -->
 <div class="screen" id="s3-review">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Step 2 of 3</div><div class="ptrack"><div class="pfill" style="width:66%"></div></div><div class="pstep">Review activity</div></div>
-  <div class="page-header"><div class="step-tag">Step 2 — Review activity</div><div class="page-title">Review your account activity</div><div class="page-sub">Expand a session and flag any you don't recognise.</div></div>
+  <div class="page-header"><div class="step-tag">Step 2 — Review activity</div><div class="page-title">Review your account activity</div><div class="page-sub">Identify sessions you don't recognise. Expand a session and flag any you don't recognise.</div></div>
   <div class="body">
 
     <!-- Session 1: Google Pixel -->
@@ -377,24 +420,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
     </div>
 
-    <!-- Session 2: iPhone 15 -->
-    <div class="session-card" id="p3sc1">
-      <div class="session-hdr" onclick="toggleSess('p3p1','p3c1')">
-        <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-2 20h-4v-1h4v1zm3.25-3H6.75V4.75h10.5V18z" fill="#555"/></svg></div>
-        <div class="dev-info"><div class="dev-name">iPhone 15 · iOS · Safari</div><div class="dev-meta">New York, NY · Jan 4, 2026 · 9:22 AM</div></div>
-        <div class="sess-right" onclick="event.stopPropagation()">
-          <div class="dnr-wrap"><span class="dnr-label">Do not recognise?</span><label class="tog"><input type="checkbox" onchange="togSessFlag('p3sc1',this.checked)"><div class="tog-track"></div><div class="tog-thumb"></div></label></div>
-        </div>
-        <div class="chevron" id="p3c1">▼</div>
-      </div>
-      <div class="sess-panel" id="p3p1">
-        <div class="sess-summary">This session started on <strong>Jan 4, 2026</strong> and ended at <strong>9:41 AM</strong>. During this session, your <strong>account password was changed</strong>. <a href="#" onclick="return false;">Check other activity here →</a></div>
-        <div class="ev-row"><div class="ev-dot"></div><div class="ev-info"><div class="ev-name">Password changed</div><div class="ev-sub">iPhone 15 · New York, NY</div></div><div class="ev-time">9:41 AM</div></div>
-        <div class="ev-row"><div class="ev-dot"></div><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">iPhone 15 · New York, NY</div></div><div class="ev-time">9:22 AM</div></div>
-      </div>
-    </div>
-
-    <!-- Session 3: MacBook Pro -->
+    <!-- Session 2: MacBook Pro -->
     <div class="session-card" id="p3sc2">
       <div class="session-hdr" onclick="toggleSess('p3p2','p3c2')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
@@ -422,6 +448,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S4: PHASE IV — Planning -->
 <div class="screen" id="s4-plan">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s3-review')">←</div><div class="plabel">Step 3 of 4</div><div class="ptrack"><div class="pfill" style="width:75%"></div></div><div class="pstep">Plan actions</div></div>
   <div class="page-header"><div class="step-tag">Step 3 — Plan actions</div><div class="page-title">Plan actions you want to take</div><div class="page-sub">Review each session and select whether you want to complete or skip each action.</div></div>
@@ -465,45 +492,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
     </div>
 
-    <!-- Session 2: iPhone 15 -->
-    <div class="session-card">
-      <div class="session-hdr" onclick="toggleSess('p4p1','p4c1')">
-        <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-2 20h-4v-1h4v1zm3.25-3H6.75V4.75h10.5V18z" fill="#555"/></svg></div>
-        <div class="dev-info"><div class="dev-name">iPhone 15 · iOS · Safari</div><div class="dev-meta">New York, NY · Jan 4, 2026</div></div>
-        <div class="chevron" id="p4c1">▼</div>
-      </div>
-      <div class="sess-panel" id="p4p1">
-        <div class="sess-summary">This session started on <strong>Jan 4, 2026</strong>. During this session, your <strong>account password was changed</strong>.</div>
-        <div class="action-item">
-          <div class="action-q">Do you want to sign out this iPhone 15 session?</div>
-          <div class="cons-row">
-            <div class="con-block"><div class="con-label c">If completed</div><div class="con-text">Whoever signed in on this iPhone 15 will no longer have access to your account on their device.</div></div>
-            <div class="con-block"><div class="con-label s">If skipped</div><div class="con-text">This session remains and whoever is signed in may still access your account.</div></div>
-          </div>
-          <div class="warn-notice"><svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg><div class="warn-text">If completed, a confirmation will be sent to <strong><span class="em" data-u="alice" data-d="email.com"></span></strong> indicating this device has been signed out.</div></div>
-          <div class="sel-btns">
-            <button class="sel-btn" id="b2c" onclick="selAction('b2c','b2s','i2')">✓ Complete</button>
-            <button class="sel-btn" id="b2s" onclick="selAction('b2s','b2c','i2')">✗ Skip</button>
-          </div>
-          <div class="sel-indicator" id="i2"></div>
-        </div>
-        <div class="action-item">
-          <div class="action-q">Do you want to reset your password?</div>
-          <div class="cons-row">
-            <div class="con-block"><div class="con-label c">If completed</div><div class="con-text">Your password will be reset and anyone using the current password will be signed out.</div></div>
-            <div class="con-block"><div class="con-label s">If skipped</div><div class="con-text">Your current password remains active and anyone who knows it may still sign in.</div></div>
-          </div>
-          <div class="warn-notice"><svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg><div class="warn-text">If completed, a confirmation will be sent to <strong><span class="em" data-u="alice" data-d="email.com"></span></strong> once your password has been reset.</div></div>
-          <div class="sel-btns">
-            <button class="sel-btn" id="b3c" onclick="selAction('b3c','b3s','i3')">✓ Complete</button>
-            <button class="sel-btn" id="b3s" onclick="selAction('b3s','b3c','i3')">✗ Skip</button>
-          </div>
-          <div class="sel-indicator" id="i3"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Session 3: MacBook Pro -->
+    <!-- Session 2: MacBook Pro -->
     <div class="session-card">
       <div class="session-hdr" onclick="toggleSess('p4p2','p4c2')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
@@ -539,6 +528,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S5: PHASE V — Secure account -->
 <div class="screen" id="s5-secure">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s3-review')">←</div><div class="plabel">Step 3 of 3</div><div class="ptrack"><div class="pfill" style="width:90%"></div></div><div class="pstep">Secure account</div></div>
   <div class="page-header"><div class="step-tag">Step 3 — Secure account</div><div class="page-title">Secure your account</div><div class="page-sub">Expand an item to take action.</div></div>
@@ -592,11 +582,6 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
             <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
           </div>
           <div class="signout-entry">
-            <div style="width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-2 20h-4v-1h4v1zm3.25-3H6.75V4.75h10.5V18z" fill="#555"/></svg></div>
-            <div class="so-info"><div class="so-name">iPhone 15 · iOS · Safari</div><div class="so-meta">New York, NY · Jan 4, 2026</div></div>
-            <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
-          </div>
-          <div class="signout-entry">
             <div style="width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
             <div class="so-info"><div class="so-name">MacBook Pro · macOS · Chrome</div><div class="so-meta">New York, NY · Nov 12, 2025</div></div>
             <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
@@ -633,6 +618,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S6: PHASE VI — Summary -->
 <div class="screen" id="s6-summary">
+  <div class="b-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="b-url">🔒 noogle.com/security/wizard</div></div>
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s5-secure')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Summary</div></div>
   <div class="page-header"><div class="step-tag">Summary of changes</div><div class="page-title">Here's what changed on your account</div><div class="page-sub">A summary of changes to your account during this remediation session.</div></div>
@@ -649,12 +635,6 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       <div class="res-card"><div class="res-icon">↩</div><div class="res-text"><div class="res-title">Complete remaining actions</div><div class="res-desc">Go to security settings to reset your password and set up 2FA</div></div><div style="font-size:12px;color:#98978f">→</div></div>
       <div class="res-card"><div class="res-icon">📄</div><div class="res-text"><div class="res-title">Understanding passkeys</div><div class="res-desc">Learn how passkeys work and how to manage them</div></div><div style="font-size:12px;color:#98978f">→</div></div>
       <div class="res-card"><div class="res-icon">💬</div><div class="res-text"><div class="res-title">Contact support</div><div class="res-desc">Speak with a specialist if you need further help</div></div><div style="font-size:12px;color:#98978f">→</div></div>
-    </div>
-    <div>
-      <div class="sec-label">Good security hygiene</div>
-      <div class="hyg-card"><div class="hyg-title">Use a unique password for every account</div><div class="hyg-desc">Reusing passwords across services means a single breach can expose multiple accounts.</div></div>
-      <div class="hyg-card"><div class="hyg-title">Review your active sign-ins regularly</div><div class="hyg-desc">Periodically checking your account activity helps you catch unrecognised access early.</div></div>
-      <div class="hyg-card"><div class="hyg-title">Be cautious of suspicious emails</div><div class="hyg-desc">Always navigate to sites directly rather than clicking links in unexpected emails.</div></div>
     </div>
   </div>
   <div class="footer">
