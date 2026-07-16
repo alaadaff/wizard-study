@@ -8,7 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;color:#1c1c1a}
-.app{max-width:580px;margin:0 auto;padding:24px 16px 60px}
+.app{max-width:900px;margin:0 auto;padding:24px 16px 60px}
 .card{background:#fff;border-radius:14px;border:1px solid #e4e3dd;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,0.09)}
 .screen{display:none}.screen.active{display:block}
 .top-bar{background:#f7f6f2;border-bottom:1px solid #e4e3dd;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
@@ -245,7 +245,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 <div class="screen active" id="s0">
   <div class="e-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="efrom">From: <span><span class="em" data-u="alice" data-d="email.com"></span></span></div></div>
   <div class="e-subject"><div class="e-subject-line">Alice, a new passkey was added to your account</div><div class="e-subject-meta">To: <span class="em" data-u="alice" data-d="email.com"></span> · Mar 19, 2026 at 2:34 PM</div></div>
-  <div class="e-header"><div class="e-logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="e-sender"><span class="em" data-u="alice" data-d="email.com"></span></div></div>
+  <div class="e-header"><div class="e-logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="e-sender"><span class="em" data-u="alice" data-d="email.com"></span></div></div>
   <div class="e-alert"><div class="e-alert-icon">!</div><div class="e-alert-title">A new passkey was added to your account</div></div>
   <div class="e-content">
     <div class="e-greeting">Hi Alice,</div>
@@ -264,7 +264,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="e-manual">
       <div class="e-manual-label">Not comfortable clicking links?</div>
       <ol class="e-steps">
-        <li><span class="e-stepnum">1</span>Open your browser and go directly to the platform's website</li>
+        <li><span class="e-stepnum">1</span>Open your browser and go directly to noogle.com</li>
         <li><span class="e-stepnum">2</span>Sign in and go to Security settings → Passkeys or Sign-in methods</li>
         <li><span class="e-stepnum">3</span>Review all registered passkeys and remove any you don't recognise</li>
         <li><span class="e-stepnum">4</span>Review your recent account activity for any other changes</li>
@@ -276,14 +276,14 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S1a: Confirmed -->
 <div class="screen" id="s1-confirmed">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Done</div></div>
   <div class="outcome"><div class="o-icon dark">✓</div><div class="o-title">Thank you for confirming</div><div class="o-text">We've noted that this activity was yours. No further action is needed.</div><button class="btn" style="max-width:280px" onclick="Study.finish('confirmed_it_was_me')">Go to security settings →</button><div class="o-note">If you change your mind, you can return to this wizard from your account security settings.</div></div>
 </div>
 
 <!-- S1b: PHASE II — Intro -->
 <div class="screen" id="s1-intro">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Getting started</div><div class="ptrack"><div class="pfill" style="width:8%"></div></div><div class="pstep">Intro</div></div>
   <div style="padding:24px 22px 20px;border-bottom:1px solid #e4e3dd">
     <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#98978f;margin-bottom:6px">Welcome</div>
@@ -311,7 +311,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S2: PHASE II — Diagnosis -->
 <div class="screen" id="s2-diag">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Step 1 of 3</div><div class="ptrack"><div class="pfill" style="width:33%"></div></div><div class="pstep">Confirm activity</div></div>
   <div class="page-header"><div class="step-tag">Step 1 — Confirm activity</div><div class="page-title">Did you add this passkey?</div><div class="page-sub">Review the details and tell us if you recognise this.</div></div>
   <div class="body">
@@ -341,21 +341,21 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- Outcome A: keep -->
 <div class="screen" id="s2-keep">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Confirmed</div></div>
   <div class="outcome"><div class="o-icon dark">✓</div><div class="o-title">Thank you for confirming</div><div class="o-text">We've noted that this activity was yours and that you want to keep the passkey. No further action is needed.</div><button class="btn" style="max-width:280px" onclick="Study.finish('confirmed_keep_passkey')">Go to security settings →</button></div>
 </div>
 
 <!-- Outcome B: remove -->
 <div class="screen" id="s2-remove">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Confirmed</div></div>
   <div class="outcome"><div class="o-icon dark">✓</div><div class="o-title">Understood — let's remove it</div><div class="o-text">Since you added this passkey but no longer want it, we can take you to your passkey settings where you can remove it directly.</div><button class="btn" style="max-width:280px;margin-bottom:8px" onclick="Study.finish('exit_to_passkey_settings')">Go to passkey settings →</button><span class="o-link" onclick="go('s3-review')">Or continue to full account review →</span></div>
 </div>
 
 <!-- S3: PHASE III — Activity review -->
 <div class="screen" id="s3-review">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Step 2 of 3</div><div class="ptrack"><div class="pfill" style="width:66%"></div></div><div class="pstep">Review activity</div></div>
   <div class="page-header"><div class="step-tag">Step 2 — Review activity</div><div class="page-title">Review your account activity</div><div class="page-sub">Expand a session and flag any you don't recognise.</div></div>
   <div class="body">
@@ -422,7 +422,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S4: PHASE IV — Planning -->
 <div class="screen" id="s4-plan">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s3-review')">←</div><div class="plabel">Step 3 of 4</div><div class="ptrack"><div class="pfill" style="width:75%"></div></div><div class="pstep">Plan actions</div></div>
   <div class="page-header"><div class="step-tag">Step 3 — Plan actions</div><div class="page-title">Plan actions you want to take</div><div class="page-sub">Review each session and select whether you want to complete or skip each action.</div></div>
   <div class="body">
@@ -539,7 +539,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S5: PHASE V — Secure account -->
 <div class="screen" id="s5-secure">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s3-review')">←</div><div class="plabel">Step 3 of 3</div><div class="ptrack"><div class="pfill" style="width:90%"></div></div><div class="pstep">Secure account</div></div>
   <div class="page-header"><div class="step-tag">Step 3 — Secure account</div><div class="page-title">Secure your account</div><div class="page-sub">Expand an item to take action.</div></div>
   <div class="body">
@@ -633,7 +633,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 <!-- S6: PHASE VI — Summary -->
 <div class="screen" id="s6-summary">
-  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s5-secure')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Summary</div></div>
   <div class="page-header"><div class="step-tag">Summary of changes</div><div class="page-title">Here's what changed on your account</div><div class="page-sub">A summary of changes to your account during this remediation session.</div></div>
   <div class="body">
