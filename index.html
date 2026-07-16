@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Security Wizard Study</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;color:#1c1c1a}
+.app{max-width:580px;margin:0 auto;padding:24px 16px 60px}
+.card{background:#fff;border-radius:14px;border:1px solid #e4e3dd;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,0.09)}
+.header{padding:26px 24px 18px;border-bottom:1px solid #e4e3dd}
+.kicker{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#98978f;margin-bottom:6px}
+h1{font-family:'DM Serif Display',serif;font-size:24px;line-height:1.2;font-weight:400}
+.body{padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+p{font-size:14px;color:#58584f;line-height:1.7}
+.scenario{background:#f7f6f2;border:1px solid #e4e3dd;border-radius:10px;padding:14px 16px}
+.scenario p{font-size:13px}
+.scenario strong{color:#1c1c1a;font-weight:600}
+label{font-size:12px;font-weight:500;color:#58584f;display:block;margin-bottom:5px}
+input{width:100%;padding:11px 13px;border-radius:8px;border:1px solid #d0cfc8;font-family:'DM Sans',sans-serif;font-size:14px;color:#1c1c1a;outline:none}
+input:focus{border-color:#1c1c1a}
+.hint{font-size:11px;color:#98978f;margin-top:5px;line-height:1.5}
+.footer{padding:16px 24px 24px;border-top:1px solid #e4e3dd}
+.btn{width:100%;padding:13px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;background:#1c1c1a;color:#fff}
+.btn:hover{opacity:.88}
+</style>
+</head>
+<body>
+<div class="app"><div class="card">
+  <div class="header">
+    <div class="kicker">Research study</div>
+    <h1>Account security wizard walkthroughs</h1>
+  </div>
+  <div class="body">
+    <p>Thank you for taking part. You will complete <strong style="color:#1c1c1a">two short interactive walkthroughs</strong> of an account security tool. Each takes about 5 minutes.</p>
+    <!-- Edit this scenario framing to match your study protocol -->
+    <div class="scenario">
+      <p><strong>Scenario:</strong> Imagine you are <strong>Alice</strong>. You have just received an email from a platform you use, telling you about recent activity on your account. Please read and interact with everything exactly as you would if this were your own account.</p>
+    </div>
+    <div>
+      <label for="pid">Participant ID</label>
+      <input id="pid" type="text" autocomplete="off" placeholder="e.g. P-07">
+      <div class="hint">Use the ID from your study invitation email. If you don't have one, leave this blank and an ID will be generated for you.</div>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="btn" onclick="Study.begin(document.getElementById('pid').value)">Begin part 1 →</button>
+  </div>
+</div></div>
+<script src="study.js"></script>
+<script>
+Study.initPage("index");
+// Allow pre-filled links like index.html?pid=P-07
+var m = location.search.match(/[?&]pid=([^&]+)/);
+if (m) document.getElementById("pid").value = decodeURIComponent(m[1]);
+</script>
+</body>
+</html>

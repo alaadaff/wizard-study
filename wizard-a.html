@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Security Wizard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;color:#1c1c1a}
+.app{max-width:580px;margin:0 auto;padding:24px 16px 60px}
+.card{background:#fff;border-radius:14px;border:1px solid #e4e3dd;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,0.09)}
+.screen{display:none}.screen.active{display:block}
+.top-bar{background:#f7f6f2;border-bottom:1px solid #e4e3dd;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+.logo-row{display:flex;align-items:center;gap:8px}
+.logo-mark{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;font-family:'DM Serif Display',serif;background:#eeede8;color:#1c1c1a;border:1px solid #e4e3dd}
+.logo-name{font-size:13px;font-weight:600}
+.top-tag{font-size:11px;color:#98978f}
+.pbar{padding:11px 22px;border-bottom:1px solid #e4e3dd;display:flex;align-items:center;gap:10px;background:#fff}
+.back-btn{width:28px;height:28px;border-radius:50%;background:#f7f6f2;border:1px solid #d0cfc8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#58584f;cursor:pointer;flex-shrink:0;user-select:none}
+.plabel{font-size:11px;color:#98978f;font-weight:500;white-space:nowrap}
+.ptrack{flex:1;height:3px;background:#eeede8;border-radius:2px;overflow:hidden}
+.pfill{height:100%;background:#1c1c1a;border-radius:2px;transition:width .4s ease}
+.pstep{font-size:11px;color:#98978f;white-space:nowrap}
+.btn{width:100%;padding:13px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-align:center;background-color:#1c1c1a;color:#ffffff}
+.btn-secondary{background-color:#ffffff;color:#58584f;border:1px solid #d0cfc8}
+.btn-ghost{background-color:#ffffff;color:#98978f;border:1px solid #e4e3dd}
+.footer{padding:14px 22px 22px;border-top:1px solid #e4e3dd;display:flex;flex-direction:column;gap:8px}
+.body{padding:16px 22px;display:flex;flex-direction:column;gap:14px}
+.page-header{padding:22px 22px 14px;border-bottom:1px solid #e4e3dd}
+.page-title{font-family:'DM Serif Display',serif;font-size:22px;color:#1c1c1a;line-height:1.2;margin-bottom:5px}
+.page-sub{font-size:13px;color:#58584f;line-height:1.6}
+.outcome{padding:52px 22px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.o-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;background:#1c1c1a;color:#fff}
+.o-title{font-family:'DM Serif Display',serif;font-size:22px;color:#1c1c1a;margin-bottom:8px}
+.o-text{font-size:13px;color:#58584f;line-height:1.65;max-width:320px;margin-bottom:20px}
+.o-note{font-size:12px;color:#98978f;max-width:300px;margin-top:12px;line-height:1.55}
+
+/* ── S0: Google-style email ── */
+.e-chrome{background:#f7f6f2;border-bottom:1px solid #e4e3dd;padding:10px 18px;display:flex;align-items:center;gap:10px}
+.edots{display:flex;gap:5px}
+.edot{width:9px;height:9px;border-radius:50%}
+.ed1{background:#FF5F57}.ed2{background:#FFBD2E}.ed3{background:#28CA41}
+.efrom{font-size:11px;color:#98978f;margin-left:6px}
+.efrom span{color:#58584f;font-weight:500}
+.ge-content{padding:40px 32px 28px;text-align:center}
+.ge-logo{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:24px}
+.ge-title{font-family:'DM Serif Display',serif;font-size:24px;color:#1c1c1a;line-height:1.25;margin-bottom:14px}
+.ge-account{display:inline-flex;align-items:center;gap:8px;background:#f7f6f2;border:1px solid #e4e3dd;border-radius:20px;padding:5px 14px 5px 6px;margin-bottom:22px}
+.ge-avatar{width:22px;height:22px;border-radius:50%;background:#1c1c1a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+.ge-email{font-size:12px;font-weight:500;color:#58584f}
+.ge-divider{height:1px;background:#e4e3dd;margin:0 0 22px}
+.ge-body{font-size:14px;color:#58584f;line-height:1.75;margin-bottom:24px;text-align:center}
+.ge-cta{display:inline-block;padding:13px 36px;border-radius:8px;font-size:14px;font-weight:600;background-color:#1c1c1a;color:#ffffff;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;margin-bottom:20px}
+.ge-alt{font-size:12px;color:#98978f;line-height:1.6}
+.ge-alt span{color:#58584f;text-decoration:underline;cursor:pointer}
+.ge-footnote{padding:16px 32px 22px;border-top:1px solid #e4e3dd;font-size:11px;color:#98978f;text-align:center;line-height:1.6}
+
+/* ── S1: Google-style diagnosis ── */
+.gd-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.gd-date{font-size:12px;color:#58584f;font-weight:500}
+.gd-new{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:#1c1c1a;color:#fff}
+.gd-title{font-family:'DM Serif Display',serif;font-size:23px;color:#1c1c1a;line-height:1.2;margin-bottom:8px}
+.gd-account{display:inline-flex;align-items:center;gap:7px;margin-bottom:14px}
+.gd-avatar{width:18px;height:18px;border-radius:50%;background:#1c1c1a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600}
+.gd-email{font-size:12px;color:#58584f}
+.gd-risk{font-size:13px;color:#58584f;line-height:1.6;margin-bottom:16px}
+.gd-card{background:#f7f6f2;border:1px solid #e4e3dd;border-radius:10px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.gd-dev-icon{width:44px;height:44px;border-radius:8px;background:#fff;border:1px solid #e4e3dd;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gd-dev-info{flex:1}
+.gd-dev-name{font-size:14px;font-weight:600;color:#1c1c1a;margin-bottom:2px}
+.gd-dev-sub{font-size:12px;color:#58584f;margin-bottom:6px}
+.gd-dev-rows{font-size:12px;color:#98978f;line-height:1.7}
+.gd-dev-rows strong{color:#58584f;font-weight:500}
+.gd-q{font-size:14px;font-weight:600;color:#1c1c1a;margin-bottom:12px}
+.gd-btns{display:flex;flex-direction:column;gap:8px}
+
+/* ── S2: Collapsible actions ── */
+.act-item{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden;margin-bottom:10px}
+.act-item:last-child{margin-bottom:0}
+.act-hdr{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#f7f6f2;cursor:pointer;user-select:none}
+.act-num{width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid #d0cfc8;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#58584f;flex-shrink:0}
+.act-num.done{background:#1c1c1a;border-color:#1c1c1a;color:#fff}
+.act-num.warn{background:#C0392B;border-color:#C0392B;color:#fff}
+.act-titles{flex:1}
+.act-title{font-size:14px;font-weight:600;color:#1c1c1a}
+.act-sub{font-size:11px;color:#98978f;margin-top:1px}
+.chevron{font-size:11px;color:#98978f;transition:transform .2s;flex-shrink:0}
+.chevron.open{transform:rotate(180deg)}
+.act-panel{display:none;border-top:1px solid #e4e3dd;background:#fff}
+.act-panel.open{display:block}
+.panel-inner{padding:16px}
+.panel-title{font-size:14px;font-weight:600;color:#1c1c1a;margin-bottom:3px}
+.panel-sub{font-size:12px;color:#98978f;margin-bottom:14px;line-height:1.55}
+
+/* Passkey / session entries */
+.entry{display:flex;align-items:center;gap:11px;padding:12px 13px;border:1px solid #e4e3dd;border-radius:8px;margin-bottom:8px;background:#fff}
+.entry:last-child{margin-bottom:0}
+.entry.flagged{border:1.5px solid #c9a800;background:#fffbf0}
+.entry-icon{width:34px;height:34px;border-radius:8px;background:#f7f6f2;border:1px solid #e4e3dd;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.entry-info{flex:1;min-width:0}
+.entry-name{font-size:13px;font-weight:600;color:#1c1c1a}
+.entry-meta{font-size:11px;color:#98978f;margin-top:2px;line-height:1.55}
+.entry-btn{padding:8px 16px;border-radius:7px;border:none;background-color:#1c1c1a;color:#ffffff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.entry-btn.done{background-color:#f7f6f2;color:#98978f;border:1px solid #e4e3dd;cursor:default}
+.new-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;background:#1c1c1a;color:#fff;margin-left:6px;vertical-align:middle;letter-spacing:.04em}
+
+/* Password reset form */
+.pw-field{margin-bottom:12px}
+.pw-label{font-size:12px;font-weight:500;color:#58584f;margin-bottom:5px}
+.pw-input{width:100%;padding:11px 13px;border-radius:8px;border:1px solid #d0cfc8;font-family:'DM Sans',sans-serif;font-size:13px;color:#1c1c1a;background:#fff;outline:none}
+.pw-input:focus{border-color:#1c1c1a}
+.pw-btn{width:100%;padding:12px;border-radius:8px;border:none;background-color:#1c1c1a;color:#ffffff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
+.pw-btn.done{background-color:#f7f6f2;color:#98978f;border:1px solid #e4e3dd;cursor:default}
+
+/* Summary */
+.sum-band{border:1px solid #e4e3dd;border-radius:8px;overflow:hidden}
+.status-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #e4e3dd}
+.status-row:last-child{border-bottom:none}
+.st-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;background:#1c1c1a;color:#fff}
+.st-icon.warn{background:#C0392B;color:#fff}
+.st-icon.pending{background:#f7f6f2;border:1.5px solid #d0cfc8;color:transparent}
+.st-info{flex:1}
+.st-name{font-size:13px;font-weight:500;color:#1c1c1a}
+.st-detail{font-size:11px;color:#98978f}
+.sbadge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:#f7f6f2;color:#98978f;border:1px solid #e4e3dd;white-space:nowrap}
+.sbadge.warn{background:#fbeceb;color:#C0392B;border:1px solid #e8b0aa}
+</style>
+</head>
+<body>
+<div class="app"><div class="card">
+
+<!-- ── S0: Email (Google style) ── -->
+<div class="screen active" id="s0">
+  <div class="e-chrome"><div class="edots"><div class="edot ed1"></div><div class="edot ed2"></div><div class="edot ed3"></div></div><div class="efrom">From: <span class="em" data-u="security" data-d="platform.com"></span></div></div>
+  <div class="ge-content">
+    <div class="ge-logo"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div>
+    <div class="ge-title">New passkey added to your account</div>
+    <div class="ge-account"><div class="ge-avatar">A</div><div class="ge-email"><span class="em" data-u="alice" data-d="email.com"></span></div></div>
+    <div class="ge-divider"></div>
+    <div class="ge-body">If you didn't add a passkey, someone might be using your account. Check and secure your account now.</div>
+    <button class="ge-cta" onclick="go('s1')">Check activity</button>
+    <div class="ge-alt">You can also see security activity at<br><span>platform.com/security/notifications</span></div>
+  </div>
+  <div class="ge-footnote">You received this email to let you know about important changes to your Platform account and services.</div>
+</div>
+
+<!-- ── Confirmed outcome ── -->
+<div class="screen" id="s-confirmed">
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="outcome"><div class="o-icon">✓</div><div class="o-title">Thank you for confirming</div><div class="o-text">We've noted that this activity was yours. No further action is needed.</div><button class="btn" style="max-width:280px" onclick="Study.finish('confirmed_it_was_me')">Done</button><div class="o-note">If you change your mind, you can return to this wizard from your account security settings.</div></div>
+</div>
+
+<!-- ── S1: Diagnosis (Google style) ── -->
+<div class="screen" id="s1">
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="pbar"><div class="back-btn" onclick="go('s0')">←</div><div class="plabel">Step 1 of 2</div><div class="ptrack"><div class="pfill" style="width:50%"></div></div><div class="pstep">Confirm activity</div></div>
+  <div class="body" style="padding:22px">
+    <div>
+      <div class="gd-meta"><div class="gd-date">March 19, 2:34 PM</div><div class="gd-new">New</div></div>
+      <div class="gd-title">New passkey added to your account</div>
+      <div class="gd-account"><div class="gd-avatar">A</div><div class="gd-email"><span class="em" data-u="alice" data-d="email.com"></span></div></div>
+      <div class="gd-risk">Your account is at risk if this wasn't you.</div>
+    </div>
+    <div class="gd-card">
+      <div class="gd-dev-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
+      <div class="gd-dev-info">
+        <div class="gd-dev-name">Google Pixel</div>
+        <div class="gd-dev-sub">Android · Chrome</div>
+        <div class="gd-dev-rows">
+          <strong>When:</strong> Mar 19, 2026 · 2:34 PM<br>
+          <strong>Location:</strong> New York, NY, USA<br>
+          <strong>Passkey manager:</strong> Google Password Manager<br>
+          <strong>Last used:</strong> Mar 19, 2026 · 5:00 PM
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="gd-q">Do you recognise this activity?</div>
+      <div class="gd-btns">
+        <button class="btn" onclick="go('s2')">No, secure account →</button>
+        <button class="btn btn-secondary" onclick="go('s-confirmed')">Yes, it was me</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── S2: Collapsible actions ── -->
+<div class="screen" id="s2">
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="pbar"><div class="back-btn" onclick="go('s1')">←</div><div class="plabel">Step 2 of 2</div><div class="ptrack"><div class="pfill" style="width:90%"></div></div><div class="pstep">Secure account</div></div>
+  <div class="page-header"><div class="page-title">Secure your account</div><div class="page-sub">Complete each action below to remove unrecognised access and secure your account.</div></div>
+  <div class="body">
+
+    <!-- Action 1: Remove passkey -->
+    <div class="act-item">
+      <div class="act-hdr" onclick="togglePanel('p0','c0','pk')">
+        <div class="act-num" id="n0">1</div>
+        <div class="act-titles"><div class="act-title">Remove the passkey</div></div>
+        <div class="chevron" id="c0">▼</div>
+      </div>
+      <div class="act-panel" id="p0">
+        <div class="panel-inner">
+          <div class="panel-title">Passkeys</div>
+          <div class="panel-sub">Passkeys registered on your account. Remove any you don't recognise.</div>
+          <div class="entry flagged">
+            <div class="entry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
+            <div class="entry-info">
+              <div class="entry-name">Google Password Manager<span class="new-tag">NEW</span></div>
+              <div class="entry-meta">Created: March 19, 2026, 2:34 PM<br>Last used: Mar 19, 2026, 5:00 PM, Chrome on Android in New York, NY, USA</div>
+            </div>
+            <button class="entry-btn" onclick="markBtn(this,'Removed','pk',true)">Remove</button>
+          </div>
+          <div class="entry">
+            <div class="entry-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#555"/></svg></div>
+            <div class="entry-info">
+              <div class="entry-name">iCloud Keychain</div>
+              <div class="entry-meta">Created: October 24, 2025, 11:23 AM<br>Last used: March 12, 2026, Safari on Mac in New York, NY, USA</div>
+            </div>
+            <button class="entry-btn" onclick="markBtn(this,'Removed','pk',false)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action 2: End sessions -->
+    <div class="act-item">
+      <div class="act-hdr" onclick="togglePanel('p1','c1','ss')">
+        <div class="act-num" id="n1">2</div>
+        <div class="act-titles"><div class="act-title">End sessions</div></div>
+        <div class="chevron" id="c1">▼</div>
+      </div>
+      <div class="act-panel" id="p1">
+        <div class="panel-inner">
+          <div class="panel-title">Sessions</div>
+          <div class="panel-sub">Devices currently or recently signed in to your account.</div>
+          <div class="entry flagged">
+            <div class="entry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
+            <div class="entry-info">
+              <div class="entry-name">Google Pixel</div>
+              <div class="entry-meta">Android · Chrome<br>Signed in: Mar 19, 2026, 11:10 AM · New York, NY, USA</div>
+            </div>
+            <button class="entry-btn" onclick="markBtn(this,'Ended','ss',true)">End session</button>
+          </div>
+          <div class="entry">
+            <div class="entry-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
+            <div class="entry-info">
+              <div class="entry-name">MacBook Pro</div>
+              <div class="entry-meta">macOS · Safari<br>Signed in: Nov 12, 2025, 3:05 PM · New York, NY, USA</div>
+            </div>
+            <button class="entry-btn" onclick="markBtn(this,'Ended','ss',false)">End session</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action 3: Reset password -->
+    <div class="act-item">
+      <div class="act-hdr" onclick="togglePanel('p2','c2','pw')">
+        <div class="act-num" id="n2">3</div>
+        <div class="act-titles"><div class="act-title">Reset your password</div></div>
+        <div class="chevron" id="c2">▼</div>
+      </div>
+      <div class="act-panel" id="p2">
+        <div class="panel-inner">
+          <div class="panel-title">Reset password</div>
+          <div class="panel-sub">Enter your current password and choose a new one. Anyone using your old password will be signed out.</div>
+          <div class="pw-field">
+            <div class="pw-label">Current password</div>
+            <input type="password" class="pw-input" placeholder="Enter current password">
+          </div>
+          <div class="pw-field">
+            <div class="pw-label">New password</div>
+            <input type="password" class="pw-input" placeholder="Enter new password">
+          </div>
+          <button class="pw-btn" id="pwbtn" onclick="resetPw(this)">Reset password</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:#98978f;line-height:1.6;text-align:center">A confirmation will be sent to <span class="em" data-u="alice" data-d="email.com" style="font-weight:600;color:#58584f"></span> for each completed action.</div>
+  </div>
+  <div class="footer">
+    <button class="btn" onclick="go('s3')">Continue to summary →</button>
+  </div>
+</div>
+
+<!-- ── S3: Summary ── -->
+<div class="screen" id="s3">
+  <div class="top-bar"><div class="logo-row"><div class="logo-mark">P</div><div class="logo-name">Platform</div></div><div class="top-tag">Account security wizard</div></div>
+  <div class="pbar"><div class="back-btn" onclick="go('s2')">←</div><div class="plabel">Complete</div><div class="ptrack"><div class="pfill" style="width:100%"></div></div><div class="pstep">Summary</div></div>
+  <div class="page-header"><div class="page-title">Summary of actions</div></div>
+  <div class="body">
+    <div class="sum-band">
+      <div class="status-row"><div class="st-icon pending" id="sum-i-pk"></div><div class="st-info"><div class="st-name">Remove the passkey</div><div class="st-detail" id="sum-d-pk">Not completed</div></div><div class="sbadge" id="sum-b-pk">Incomplete</div></div>
+      <div class="status-row"><div class="st-icon pending" id="sum-i-ss"></div><div class="st-info"><div class="st-name">End sessions</div><div class="st-detail" id="sum-d-ss">Not completed</div></div><div class="sbadge" id="sum-b-ss">Incomplete</div></div>
+      <div class="status-row"><div class="st-icon pending" id="sum-i-pw"></div><div class="st-info"><div class="st-name">Reset your password</div><div class="st-detail" id="sum-d-pw">Not completed</div></div><div class="sbadge" id="sum-b-pw">Incomplete</div></div>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="btn" onclick="Study.finish('summary_complete')">Continue to account settings →</button>
+  </div>
+</div>
+
+</div></div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='s3'){populateSummary();}
+}
+function populateSummary(){
+  var groups=[
+    {g:'pk', doneText:'Suspicious passkey removed', warnText:'Suspicious passkey left in place', pendText:'Not completed'},
+    {g:'ss', doneText:'Suspicious session ended', warnText:'Suspicious session still active', pendText:'Not completed'},
+    {g:'pw', doneText:'New password set', warnText:'Password not reset', pendText:'Not completed'}
+  ];
+  groups.forEach(function(o){
+    var icon=document.getElementById('sum-i-'+o.g);
+    var det=document.getElementById('sum-d-'+o.g);
+    var badge=document.getElementById('sum-b-'+o.g);
+    icon.className='st-icon';badge.className='sbadge';
+    if(suspiciousDone[o.g]){
+      icon.classList.add('done');icon.textContent='✓';
+      det.textContent=o.doneText;badge.textContent='Done';
+    } else if(touched[o.g]){
+      icon.classList.add('warn');icon.textContent='!';
+      det.textContent=o.warnText;badge.classList.add('warn');badge.textContent='Action needed';
+    } else {
+      icon.classList.add('pending');icon.textContent='';
+      det.textContent=o.pendText;badge.textContent='Incomplete';
+    }
+  });
+}
+// Step number reflects whether the SUSPICIOUS entry in each group was removed.
+// suspiciousDone: suspicious entry removed -> checkmark
+// anyDone (without suspicious): only non-suspicious removed, or opened-only -> red exclamation
+var suspiciousDone={pk:false,ss:false,pw:false};
+var touched={pk:false,ss:false,pw:false}; // opened or any action taken
+var numMap={pk:'n0',ss:'n1',pw:'n2'};
+
+function togglePanel(panelId,chevId,group){
+  var p=document.getElementById(panelId),c=document.getElementById(chevId);
+  var isOpen=p.classList.contains('open');
+  p.classList.toggle('open',!isOpen);
+  c.classList.toggle('open',!isOpen);
+  if(!isOpen){ touched[group]=true; }
+  refreshNum(group);
+}
+function refreshNum(group){
+  var el=document.getElementById(numMap[group]);
+  if(suspiciousDone[group]){
+    el.classList.remove('warn');el.classList.add('done');el.textContent='✓';
+  } else if(touched[group]){
+    el.classList.remove('done');el.classList.add('warn');el.textContent='!';
+  }
+}
+function markBtn(btn,label,group,isSuspicious){
+  btn.textContent='✓ '+label;
+  btn.classList.add('done');
+  btn.onclick=null;
+  touched[group]=true;
+  if(isSuspicious){ suspiciousDone[group]=true; }
+  refreshNum(group);
+}
+function resetPw(btn){
+  btn.textContent='✓ Password reset';
+  btn.classList.add('done');
+  btn.onclick=null;
+  suspiciousDone['pw']=true;
+  touched['pw']=true;
+  refreshNum('pw');
+}
+document.querySelectorAll('.em').forEach(function(el){
+  el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
+});
+</script>
+<script src="study.js"></script>
+<script>Study.initWizard("A");</script>
+</body>
+</html>
