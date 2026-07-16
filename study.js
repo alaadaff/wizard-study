@@ -40,6 +40,22 @@ var Study = (function () {
   function randomId() {
     return "P-" + Math.random().toString(36).slice(2, 8).toUpperCase();
   }
+  function getParam(name) {
+    var m = location.search.match(new RegExp("[?&]" + name + "=([^&]+)"));
+    return m ? decodeURIComponent(m[1]) : "";
+  }
+  function newState(pid, firstCode) {
+    var first = firstCode || (Math.random() < 0.5 ? "A" : "B");
+    return {
+      pid: pid || randomId(),
+      order: [first, first === "A" ? "B" : "A"],
+      part: 0,
+      test: false,
+      startedAt: new Date().toISOString(),
+      events: [],
+      sent: 0
+    };
+  }
 
   /* ── event logging ──────────────────────────────────────── */
   function activeScreen() {
@@ -160,18 +176,28 @@ var Study = (function () {
   /* ── public API ─────────────────────────────────────────── */
   return {
 
-    // index.html — start a fresh session and go to the first wizard.
-    begin: function (pid) {
-      page = "index";
-      state = {
-        pid: (pid || "").trim() || randomId(),
-        order: Math.random() < 0.5 ? ["A", "B"] : ["B", "A"],
-        part: 0,
-        test: false,
-        startedAt: new Date().toISOString(),
-        events: [],
-        sent: 0
-      };
+    // part1.html — assign (or resume) a session, then drop the
+    // participant straight onto their first wizard's opening screen.
+    // Optional URL params: ?pid=P-07 (invisible id), ?w=a|b (force
+    // which wizard comes first instead of randomizing).
+    enterPart1: function () {
+      page = "part1";
+      var pid = getParam("pid");
+      var w = getParam("w").toUpperCase();
+      var s = loadState();
+      var samePerson = s && !s.test && (!pid || pid === s.pid);
+      if (samePerson && s.part === 0 && s.events.length) {
+        // Re-opened the part-1 link mid-walkthrough: resume, don't wipe.
+        state = s;
+        log("study", "part1_resumed", null);
+        saveState();
+        flush();
+        location.replace(WIZARDS[state.order[0]].file);
+        return;
+      }
+      if (samePerson && s.part === 1) { location.replace("interlude.html"); return; }
+      if (samePerson && s.part >= 2 && pid) { location.replace("done.html"); return; }
+      state = newState(pid, WIZARDS[w] ? w : "");
       log("study", "begin", {
         order: state.order.map(function (c) { return WIZARDS[c].label; }),
         userAgent: navigator.userAgent,
@@ -179,7 +205,40 @@ var Study = (function () {
       });
       saveState();
       flush();
-      location.href = WIZARDS[state.order[0]].file;
+      location.replace(WIZARDS[state.order[0]].file);
+    },
+
+    // part2.html — continue the session in the same browser (the other
+    // wizard). Falls back gracefully if part 1's state is missing, with
+    // ?w=a|b forcing which wizard part 2 shows in that case.
+    enterPart2: function () {
+      page = "part2";
+      var pid = getParam("pid");
+      var w = getParam("w").toUpperCase();
+      var s = loadState();
+      var samePerson = s && !s.test && (!pid || pid === s.pid);
+      if (samePerson && s.part >= 2) { location.replace("done.html"); return; }
+      if (samePerson) {
+        state = s;
+        if (state.part === 0) log("study", "part2_opened_before_part1_finished", null);
+        state.part = 1;
+        log("study", "part2_started", null);
+        saveState();
+        flush();
+        location.replace(WIZARDS[state.order[1]].file);
+        return;
+      }
+      // No session found (different browser/device than part 1):
+      // reconstruct one so part 2 still runs, flagged for analysis.
+      var second = WIZARDS[w] ? w : (Math.random() < 0.5 ? "A" : "B");
+      state = newState(pid, second === "A" ? "B" : "A");
+      state.part = 1;
+      log("study", "part2_without_part1_state", {
+        order: state.order.map(function (c) { return WIZARDS[c].label; })
+      });
+      saveState();
+      flush();
+      location.replace(WIZARDS[state.order[1]].file);
     },
 
     // Called at the bottom of each wizard page.
@@ -222,21 +281,7 @@ var Study = (function () {
       location.href = state.part < state.order.length ? "interlude.html" : "done.html";
     },
 
-    // interlude.html helpers
-    initPage: function (name) {
-      page = name;
-      state = loadState();
-    },
-    partInfo: function () {
-      return state ? { part: state.part, total: state.order.length, pid: state.pid } : null;
-    },
-    nextFile: function () {
-      return state && state.part < state.order.length
-        ? WIZARDS[state.order[state.part]].file
-        : "index.html";
-    },
-
-    // done.html — mark complete, final flush, report status.
+    // done.html — mark complete, final flush.
     complete: function () {
       page = "done";
       state = loadState();
@@ -250,7 +295,8 @@ var Study = (function () {
       return { pid: state.pid, endpointConfigured: !!LOG_ENDPOINT };
     },
 
-    // Backup: download the full session as a JSON file.
+    // Recovery tool (not exposed in the UI): run Study.download() in the
+    // browser console to save the session in localStorage as a JSON file.
     download: function () {
       if (!state) state = loadState();
       if (!state) return;

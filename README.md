@@ -14,18 +14,36 @@ and both pages are titled "Account Security Wizard").
 
 ## Participant flow
 
+Participants receive **two links, sent separately** (e.g. by email after consent):
+
 ```
-index.html  →  wizard (random 1st)  →  interlude.html  →  wizard (2nd)  →  done.html
+Part 1:  https://<user>.github.io/wizard-study/part1.html?pid=P-07
+Part 2:  https://<user>.github.io/wizard-study/part2.html?pid=P-07
 ```
 
-- `index.html` — scenario framing + participant ID (typed, or pre-filled via
-  `index.html?pid=P-07` links you send by email). Randomizes A→B vs B→A.
-- `interlude.html` — break screen between the two parts.
-- `done.html` — thank-you screen; flushes data and offers a JSON backup download.
+- `part1.html` assigns the session (random wizard order, or `&w=a` / `&w=b` to
+  force which design comes first) and lands directly on that wizard's opening
+  email screen. Finishing shows `interlude.html`: "Part 1 complete, close this
+  window, open Part 2 in the same browser."
+- `part2.html` continues the session from the same browser's localStorage and
+  shows the *other* wizard. Finishing shows `done.html`.
+- The root URL (`index.html`) redirects to `part1.html`.
+
+The `?pid=` parameter is optional and never shown to participants; without it a
+random ID is generated. Include it if you want to link the two parts to your
+own participant numbering (and to be robust if someone switches browsers
+between parts — sessions are matched by pid where possible).
+
+If Part 2 is opened in a browser with no Part 1 state (different device), a
+session is reconstructed and flagged `part2_without_part1_state`; use `&w=` on
+the Part 2 link if you need to guarantee which wizard it shows in that case.
+
+Re-opening a link is safe: mid-walkthrough Part 1 resumes, a finished Part 1
+shows the interlude again, and a finished study shows the thank-you page.
 
 ## Data collection (`study.js`)
 
-All instrumentation lives in `study.js`, which is included by every page. It records:
+All instrumentation lives in `study.js`, included by every page. It records:
 
 - every **click** (element, label text, and its `onclick` handler),
 - every **screen transition** with from/to and timestamps,
@@ -36,7 +54,9 @@ All instrumentation lives in `study.js`, which is included by every page. It rec
 
 Events are timestamped (absolute + ms since page load), buffered in
 `localStorage`, and batched to `LOG_ENDPOINT` on every screen change, on tab
-hide/close, and at each wizard's end.
+hide/close, and at each part's end. Participants never handle data themselves;
+as a recovery tool the researcher can run `Study.download()` in the browser
+console on the participant's machine to save the local copy as JSON.
 
 ### Hooking up the Google Sheet
 
@@ -48,27 +68,15 @@ hide/close, and at each wizard's end.
 One event = one row. Sessions started by opening a wizard file directly (e.g.
 you testing) are flagged `test = TRUE` — filter them out before analysis.
 
-If `LOG_ENDPOINT` is left empty, nothing is transmitted; participants are asked
-on `done.html` to download their JSON and return it to you.
-
 ### Re-deploying the Apps Script
 
 If you edit `Code.gs` later, use Deploy → **Manage deployments** → edit → new
 version, so the URL stays the same.
 
-## Running a participant
-
-Send each participant (after consent, via email) a link like:
-
-```
-https://<your-username>.github.io/wizard-study/?pid=P-07
-```
-
-Each new session on `index.html` overwrites the previous one in that browser,
-so the same laptop can be reused across participants (e.g. in-lab sessions).
-
 ## Notes
 
+- Scenario framing ("you are Alice…") is no longer shown on-site — include it
+  in your instruction email or read it aloud in session.
 - The repo (and site) are public — anyone with the URL can view both designs
   and this README. Don't put IRB documents or participant data here.
 - `wizard-b.html` contains a "Plan actions" screen (`s4-plan`, Step 3 — Plan
