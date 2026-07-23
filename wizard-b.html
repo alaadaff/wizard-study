@@ -33,6 +33,10 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .btn-secondary{background-color:#ffffff;color:#1c1c1a;border:1px solid #d0cfc8}
 .btn-ghost{background-color:#ffffff;color:#1c1c1a;border:1px solid #d0cfc8}
 .btn-row{display:flex;flex-direction:column;gap:8px}.btn-row .btn{flex:none}
+.foot-stack{width:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.foot-stack .btn{width:100%;min-width:0;margin:0}
+.foot-stack .btn-pair{display:flex;gap:8px}
+.foot-stack .btn-pair .btn{flex:1}
 .footer{padding:14px 22px 22px;border-top:1px solid #e4e3dd;display:flex;flex-direction:column;gap:8px}
 .pill{display:inline-flex;align-items:center;gap:8px;background:#f7f6f2;border:1px solid #d0cfc8;border-radius:20px;padding:5px 12px 5px 8px}
 .pill-dot{width:7px;height:7px;border-radius:50%;background:#1c1c1a;flex-shrink:0}
@@ -431,10 +435,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     </div>
   </div>
   <div class="footer">
-    <button class="btn" onclick="go('s5-secure')">Continue to secure my account →</button>
-    <div class="btn-row">
-      <button class="btn btn-secondary">Save findings</button>
-      <button class="btn btn-ghost">Exit wizard</button>
+    <div class="foot-stack">
+      <div class="btn-pair">
+        <button class="btn" onclick="go('s5-secure')">Continue to secure my account →</button>
+        <button class="btn">Save findings</button>
+      </div>
+      <button class="btn">Exit wizard</button>
     </div>
   </div>
 </div>
@@ -597,10 +603,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div style="font-size:12px;color:#98978f;text-align:center;line-height:1.6">You can also complete these later in <span style="color:#58584f;font-weight:500;text-decoration:underline;cursor:pointer">account settings</span>.</div>
   </div>
   <div class="footer">
-    <button class="btn" onclick="go('s6-summary')">Proceed to summary →</button>
-    <div class="btn-row">
-      <button class="btn btn-secondary">Save findings</button>
-      <button class="btn btn-ghost">Exit wizard</button>
+    <div class="foot-stack">
+      <div class="btn-pair">
+        <button class="btn" onclick="go('s6-summary')">Proceed to summary →</button>
+        <button class="btn">Save findings</button>
+      </div>
+      <button class="btn">Exit wizard</button>
     </div>
   </div>
 </div>
@@ -626,8 +634,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     </div>
   </div>
   <div class="footer">
-    <button class="btn" onclick="Study.finish('summary_complete')">Done — close wizard</button>
-    <button class="btn btn-secondary">Export full summary</button>
+    <div class="foot-stack">
+      <div class="btn-pair">
+        <button class="btn" onclick="Study.finish('summary_complete')">Done — close wizard</button>
+        <button class="btn">Export full summary</button>
+      </div>
+    </div>
   </div>
 </div>
 
