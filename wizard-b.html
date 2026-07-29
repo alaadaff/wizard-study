@@ -48,7 +48,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .step-circle{width:25px;height:25px;border-radius:50%;background:#f7f6f2;border:1px solid #d0cfc8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#58584f;flex-shrink:0}
 .step-title{font-size:13px;font-weight:600;color:#1c1c1a;margin-bottom:2px}
 .step-desc{font-size:12px;color:#98978f;line-height:1.5}
-.attr-grid{background:#f7f6f2;border:1px solid #e4e3dd;border-radius:8px;overflow:hidden}
+.attr-grid{background:#f7f6f2;border:1px solid #e4e3dd;border-radius:8px}
+.attr-row:first-child .ak{border-top-left-radius:7px}
+.attr-row:last-child .ak{border-bottom-left-radius:7px}
+.info-ic{position:relative;margin-left:auto;width:15px;height:15px;border-radius:50%;background:#98978f;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-style:italic;color:#fff;cursor:help;flex-shrink:0}
+.info-ic .info-tip{visibility:hidden;opacity:0;position:absolute;right:-2px;top:145%;width:230px;background:#1c1c1a;color:#fff;font-size:11px;font-weight:400;font-style:normal;line-height:1.5;padding:9px 11px;border-radius:8px;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,0.25);text-align:left;transition:opacity .12s}
+.info-ic:hover .info-tip{visibility:visible;opacity:1}
 .attr-shdr{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#98978f;padding:6px 13px;background:#eeede8;border-bottom:1px solid #e4e3dd;display:flex;align-items:center;gap:5px}
 .attr-shdr-icon{width:13px;height:13px;border-radius:50%;background:#d0cfc8;border:1px solid #b0afaa;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#98978f;cursor:default;flex-shrink:0;text-transform:none;letter-spacing:0}
 .attr-row{display:grid;grid-template-columns:130px 1fr;border-bottom:1px solid #e4e3dd}
@@ -84,10 +89,10 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .dnr-label{font-size:11px;color:#98978f;white-space:nowrap}
 .tog{position:relative;width:32px;height:18px;flex-shrink:0}
 .tog input{opacity:0;width:0;height:0;position:absolute}
-.tog-track{position:absolute;inset:0;border-radius:18px;background:#d0cfc8;transition:background .2s;cursor:pointer}
+.tog-track{position:absolute;inset:0;border-radius:18px;background:#fff;border:1.5px solid #1c1c1a;transition:background .2s;cursor:pointer}
 .tog input:checked+.tog-track{background:#1c1c1a}
-.tog-thumb{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s;pointer-events:none}
-.tog input:checked~.tog-thumb{transform:translateX(14px)}
+.tog-thumb{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#1c1c1a;transition:transform .2s,background .2s;pointer-events:none}
+.tog input:checked~.tog-thumb{transform:translateX(14px);background:#fff}
 .chevron{font-size:11px;color:#98978f;transition:transform .2s;flex-shrink:0;margin-left:auto}
 .chevron.open{transform:rotate(180deg)}
 .sess-panel{display:none;border-top:1px solid #e4e3dd}
@@ -140,6 +145,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .secure-panel{display:none;border-top:1px solid #e4e3dd}
 .secure-panel.open{display:block}
 .settings-ui{padding:16px 14px;background:#fff}
+.pw-field{margin-bottom:12px}
+.pw-label{font-size:12px;font-weight:500;color:#58584f;margin-bottom:5px}
+.pw-input{width:100%;padding:11px 13px;border-radius:8px;border:1px solid #d0cfc8;font-family:'DM Sans',sans-serif;font-size:13px;color:#1c1c1a;background:#fff;outline:none}
+.pw-input:focus{border-color:#1c1c1a}
+.pw-btn{width:100%;padding:12px;border-radius:8px;border:1px solid #d0cfc8;background:#fff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;margin-top:4px}
+.pw-empty{font-size:12px;color:#98978f;padding:4px 2px;line-height:1.5}
 .settings-title{font-size:15px;font-weight:600;color:#1c1c1a;margin-bottom:3px}
 .settings-sub{font-size:12px;color:#98978f;margin-bottom:14px}
 .passkey-entry{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid #e4e3dd;border-radius:8px;background:#fff}
@@ -178,6 +189,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .st-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .st-icon.done{background:#1c1c1a;color:#fff}
 .st-icon.pend{background:#f7f6f2;border:1.5px solid #d0cfc8}
+.st-icon.notdone{background:#fff;border:1.5px solid #1c1c1a;color:#1c1c1a}
 .st-info{flex:1}
 .st-name{font-size:13px;font-weight:500;color:#1c1c1a}
 .pend-row .st-name{color:#58584f}
@@ -357,13 +369,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="body">
     <div class="attr-grid">
       <div class="attr-row"><div class="ak">Action</div><div class="av">Passkey added</div></div>
-      <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager</div></div>
+      <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager<span class="info-ic">i<span class="info-tip">A passkey manager stores passkeys — passwordless credentials used to sign in to your account. Google Password Manager and iCloud Keychain are examples.</span></span></div></div>
       <div class="attr-row"><div class="ak">When</div><div class="av">Mar 19, 2026 · 2:34 PM · EST</div></div>
-      <div class="attr-row"><div class="ak">Last used</div><div class="av">Mar 19, 2026 · 5:00 PM</div></div>
-      <div class="attr-row"><div class="ak">Device</div><div class="av">Google Pixel · Android · Chrome</div></div>
-      <div class="attr-row"><div class="ak">Where &amp; how <span class="attr-shdr-icon">i</span></div><div class="av">New York, NY · 192.168.0.1</div></div>
+      <div class="attr-row"><div class="ak">Last used</div><div class="av">Mar 19, 2026 · 5:00 PM · EST</div></div>
+      <div class="attr-row"><div class="ak">Device</div><div class="av">Google Pixel · Android · Chrome<span class="info-ic">i<span class="info-tip">The device, operating system, and browser associated with this activity. This is an estimate and may not be accurate.</span></span></div></div>
+      <div class="attr-row"><div class="ak">Where &amp; how</div><div class="av">New York, NY · 192.168.0.1<span class="info-ic">i<span class="info-tip">The estimated location and IP address this activity came from. This is an estimate and may not be accurate.</span></span></div></div>
     </div>
-    <div style="font-size:12px;color:#98978f;line-height:1.5">ⓘ Location and IP are estimates and may not be exact.</div>
     <div>
       <div class="intent-q">Do you recognise this?</div>
       <div class="intent-opts">
@@ -404,16 +415,16 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="session-card" id="p3sc0">
       <div class="session-hdr" onclick="toggleSess('p3p0','p3c0')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
-        <div class="dev-info"><div class="dev-name">Google Pixel · Android · Chrome</div><div class="dev-meta">New York, NY · Mar 19, 2026 · Currently active</div></div>
+        <div class="dev-info"><div class="dev-name">Session on Google Pixel · Android · Chrome</div><div class="dev-meta">New York, NY · Mar 19, 2026 · Currently active</div></div>
         <div class="sess-right" onclick="event.stopPropagation()">
           <div class="dnr-wrap"><span class="dnr-label">Do not recognise?</span><label class="tog"><input type="checkbox" onchange="togSessFlag('p3sc0',this.checked)"><div class="tog-track"></div><div class="tog-thumb"></div></label></div>
         </div>
         <div class="chevron" id="p3c0">▼</div>
       </div>
       <div class="sess-panel" id="p3p0">
-        <div class="sess-summary">This session started 4 hours ago and is currently active. During this session, a new passkey was added to your account. Check other activity here →</div>
+        <div class="sess-summary">This session started 4 hours ago and is currently active. During this session, a new passkey was added to your account.</div>
         <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added <span class="trig-badge">Triggering event</span></div><div class="ev-sub">Google Password Manager</div></div><div class="ev-time">2:34 PM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via passkey</span></div></div><div class="ev-time">11:10 AM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div></div><div class="ev-time">11:10 AM</div></div>
       </div>
     </div>
 
@@ -421,14 +432,14 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="session-card" id="p3sc2">
       <div class="session-hdr" onclick="toggleSess('p3p2','p3c2')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
-        <div class="dev-info"><div class="dev-name">MacBook Pro · macOS · Chrome</div><div class="dev-meta">New York, NY · Nov 12, 2025 · 3:05 PM</div></div>
+        <div class="dev-info"><div class="dev-name">Session on MacBook Pro · macOS · Chrome</div><div class="dev-meta">New York, NY · Nov 12, 2025 · 3:05 PM</div></div>
         <div class="sess-right" onclick="event.stopPropagation()">
           <div class="dnr-wrap"><span class="dnr-label">Do not recognise?</span><label class="tog"><input type="checkbox" onchange="togSessFlag('p3sc2',this.checked)"><div class="tog-track"></div><div class="tog-thumb"></div></label></div>
         </div>
         <div class="chevron" id="p3c2">▼</div>
       </div>
       <div class="sess-panel" id="p3p2">
-        <div class="sess-summary">This session started on Nov 12, 2025 and ended at 5:48 PM. No account changes were made during this session. Check other activity here →</div>
+        <div class="sess-summary">This session started on Nov 12, 2025 and ended at 5:48 PM. No account changes were made during this session.</div>
         <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-out</div></div><div class="ev-time">5:48 PM</div></div>
         <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div></div><div class="ev-time">3:05 PM</div></div>
       </div>
@@ -544,7 +555,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
       <div class="secure-panel" id="sp0">
         <div class="settings-ui">
-          <div class="passkey-entry">
+          <div class="passkey-entry" data-sess="pixel">
             <div style="width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
             <div class="pk-info">
               <div class="pk-name">Google Password Manager</div>
@@ -552,7 +563,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
             </div>
             <button class="pk-remove" onclick="confirmAction(this,'Removed')">Remove</button>
           </div>
-          <div class="passkey-entry" style="border-color:#e4e3dd;background:#fff">
+          <div class="passkey-entry" data-sess="macbook">
             <div style="width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#555"/></svg></div>
             <div class="pk-info">
               <div class="pk-name">iCloud Keychain</div>
@@ -560,6 +571,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
             </div>
             <button class="pk-remove" onclick="confirmAction(this,'Removed')">Remove</button>
           </div>
+          <div class="pw-empty" id="passkeys-empty" style="display:none">No flagged passkeys to review.</div>
         </div>
       </div>
     </div>
@@ -573,29 +585,43 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
       <div class="secure-panel" id="sp1">
         <div class="settings-ui">
-          <div class="signout-entry">
+          <div class="signout-entry" data-sess="pixel">
             <div style="width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
             <div class="so-info"><div class="so-name">Google Pixel · Android · Chrome</div><div class="so-meta">New York, NY · Mar 19, 2026 · Active now</div></div>
             <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
           </div>
-          <div class="signout-entry">
+          <div class="signout-entry" data-sess="macbook">
             <div style="width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
             <div class="so-info"><div class="so-name">MacBook Pro · macOS · Chrome</div><div class="so-meta">New York, NY · Nov 12, 2025</div></div>
             <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
           </div>
+          <div class="pw-empty" id="devices-empty" style="display:none">No flagged devices to review.</div>
         </div>
       </div>
     </div>
 
-    <!-- Recommended -->
-    <div class="rec-band">
-      <div class="rec-hdr"><div class="rec-hdr-title">Recommended next steps</div></div>
-      <div class="rec-row" onclick="">
-        <div style="flex:1"><div class="rec-name">Reset password</div></div>
-        <div style="font-size:12px;color:#98978f">→</div>
+    <!-- Action 3: Check password -->
+    <div class="secure-item">
+      <div class="secure-hdr" onclick="toggleSess('sp2','sc2')">
+        <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 1 1 6 0v3z" fill="#555"/></svg></div>
+        <div><div class="secure-title">Check password</div></div>
+        <div class="chevron" id="sc2">▼</div>
       </div>
+      <div class="secure-panel" id="sp2">
+        <div class="settings-ui">
+          <div class="settings-sub">Change your password. Anyone using your current password will be signed out.</div>
+          <div class="pw-field"><div class="pw-label">Current password</div><input type="password" class="pw-input" placeholder="Enter current password"></div>
+          <div class="pw-field"><div class="pw-label">New password</div><input type="password" class="pw-input" placeholder="Enter new password"></div>
+          <button class="pw-btn" onclick="changePw(this)">Change password</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next steps -->
+    <div class="rec-band">
+      <div class="rec-hdr"><div class="rec-hdr-title">Next steps you might consider</div></div>
       <div class="rec-row" onclick="">
-        <div style="flex:1"><div class="rec-name">Set up two-factor authentication</div></div>
+        <div style="flex:1"><div class="rec-name">Check 2FA</div></div>
         <div style="font-size:12px;color:#98978f">→</div>
       </div>
     </div>
@@ -623,12 +649,12 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       <div class="sum-hdr"><div class="sum-label">What we found</div><div class="sum-text">A new sign-in was detected on a Google Pixel on Mar 19, 2026 at 11:10 AM. During that session, a new passkey was added and stored in Google Password Manager.</div></div>
       <div class="status-row"><div class="st-icon done">✓</div><div class="st-info"><div class="st-name">Passkey removed from Google Pixel</div></div><div class="sbadge done">Done</div></div>
       <div class="status-row"><div class="st-icon done">✓</div><div class="st-info"><div class="st-name">Google Pixel signed out</div></div><div class="sbadge done">Done</div></div>
-      <div class="status-row pend-row"><div class="st-icon pend"></div><div class="st-info"><div class="st-name">Reset password</div></div><div class="sbadge rec">Recommended</div></div>
-      <div class="status-row pend-row"><div class="st-icon pend"></div><div class="st-info"><div class="st-name">Set up two-factor authentication</div></div><div class="sbadge rec">Recommended</div></div>
+      <div class="status-row pend-row"><div class="st-icon notdone">✕</div><div class="st-info"><div class="st-name">Reset password</div></div></div>
+      <div class="status-row pend-row"><div class="st-icon notdone">✕</div><div class="st-info"><div class="st-name">Set up two-factor authentication</div></div></div>
     </div>
     <div>
       <div class="sec-label">Further support</div>
-      <div class="res-card"><div class="res-icon">↩</div><div class="res-text"><div class="res-title">Complete remaining actions</div></div><div style="font-size:12px;color:#98978f">→</div></div>
+      <div class="res-card"><div class="res-icon">↩</div><div class="res-text"><div class="res-title">Complete additional recommended actions</div></div><div style="font-size:12px;color:#98978f">→</div></div>
       <div class="res-card"><div class="res-icon">📄</div><div class="res-text"><div class="res-title">Understanding passkeys</div></div><div style="font-size:12px;color:#98978f">→</div></div>
       <div class="res-card"><div class="res-icon">💬</div><div class="res-text"><div class="res-title">Contact support</div></div><div style="font-size:12px;color:#98978f">→</div></div>
     </div>
@@ -649,7 +675,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="modal-box">
     <div class="modal-icon">!</div>
     <div class="modal-title">Confirm this action</div>
-    <div class="modal-text">A confirmation email will be sent to <strong><span class="em" data-u="alice" data-d="email.com"></span></strong>. Do you want to confirm this action?</div>
+    <div class="modal-text" id="modalText">A confirmation will be sent to your email. Do you want to confirm this action?</div>
     <button class="modal-btn" onclick="doConfirm()">Confirm</button>
     <button class="modal-btn" style="margin-top:8px" onclick="closeModal()">Cancel</button>
   </div>
@@ -660,6 +686,29 @@ function go(id){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  if(id==='s5-secure'){applyFlagFilter();}
+}
+
+// Which sessions the participant flagged in Step 2 as "Do not recognise".
+var sessFlags={pixel:false,macbook:false};
+
+// Step 3 only lists passkeys/devices belonging to flagged sessions.
+function applyFlagFilter(){
+  var any=false;
+  ['pixel','macbook'].forEach(function(k){ if(sessFlags[k]) any=true; });
+  var shownPk=0,shownDev=0;
+  document.querySelectorAll('#sp0 .passkey-entry').forEach(function(el){
+    var show=sessFlags[el.getAttribute('data-sess')];
+    el.style.display=show?'':'none';
+    if(show)shownPk++;
+  });
+  document.querySelectorAll('#sp1 .signout-entry').forEach(function(el){
+    var show=sessFlags[el.getAttribute('data-sess')];
+    el.style.display=show?'':'none';
+    if(show)shownDev++;
+  });
+  document.getElementById('passkeys-empty').style.display=shownPk?'none':'';
+  document.getElementById('devices-empty').style.display=shownDev?'none':'';
 }
 
 var diagSel=null;
@@ -683,6 +732,16 @@ function toggleSess(panelId,chevId){
 
 function togSessFlag(cardId,checked){
   document.getElementById(cardId).classList.toggle('flagged-s',checked);
+  if(cardId==='p3sc0')sessFlags.pixel=checked;
+  if(cardId==='p3sc2')sessFlags.macbook=checked;
+}
+
+function changePw(btn){
+  btn.textContent='✓ Password changed';
+  btn.style.backgroundColor='#f7f6f2';
+  btn.style.color='#98978f';
+  btn.style.cursor='default';
+  btn.onclick=null;
 }
 
 function selAction(selId,otherId,indId){
@@ -708,6 +767,11 @@ var pendingBtn=null,pendingLabel=null;
 function confirmAction(btn,label){
   pendingBtn=btn;
   pendingLabel=label;
+  var q=label==='Removed'
+    ? 'Do you want to remove this passkey?'
+    : 'Do you want to terminate this session?';
+  document.getElementById('modalText').textContent=
+    'A confirmation will be sent to your email. '+q;
   document.getElementById('confirmModal').classList.add('show');
 }
 // Step 2: user confirms in the modal -> the action actually happens.
@@ -741,7 +805,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=2"></script>
+<script src="study.js?v=3"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>

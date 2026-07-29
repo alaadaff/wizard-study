@@ -131,7 +131,7 @@ var Study = (function () {
     // Wrap the wizard's own functions so choices are logged semantically.
     ["go", "markBtn", "resetPw", "togglePanel", "selDiag", "contDiag",
      "selAction", "confirmAction", "doConfirm", "toggleSess", "togSessFlag",
-     "closeModal", "markDone"
+     "closeModal", "markDone", "changePw", "applyFlagFilter"
     ].forEach(function (name) {
       var orig = window[name];
       if (typeof orig !== "function") return;
