@@ -347,6 +347,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       <div class="status-row"><div class="st-icon pending" id="sum-i-pk"></div><div class="st-info"><div class="st-name">Remove the passkey</div><div class="st-detail" id="sum-d-pk">Not completed</div></div><div class="sbadge" id="sum-b-pk">Incomplete</div></div>
       <div class="status-row"><div class="st-icon pending" id="sum-i-ss"></div><div class="st-info"><div class="st-name">End sessions</div><div class="st-detail" id="sum-d-ss">Not completed</div></div><div class="sbadge" id="sum-b-ss">Incomplete</div></div>
       <div class="status-row"><div class="st-icon pending" id="sum-i-pw"></div><div class="st-info"><div class="st-name">Reset your password</div><div class="st-detail" id="sum-d-pw">Not completed</div></div><div class="sbadge" id="sum-b-pw">Incomplete</div></div>
+      <div class="status-row"><div class="st-icon pending" id="sum-i-2fa"></div><div class="st-info"><div class="st-name">Set up two-factor authentication</div><div class="st-detail" id="sum-d-2fa">Not completed</div></div><div class="sbadge" id="sum-b-2fa">Recommended</div></div>
     </div>
   </div>
   <div class="footer">
@@ -385,6 +386,18 @@ function populateSummary(){
       det.textContent=o.pendText;badge.textContent='Incomplete';
     }
   });
+  // Recommended action — reported, but never flagged as "action needed".
+  var i2=document.getElementById('sum-i-2fa');
+  var d2=document.getElementById('sum-d-2fa');
+  var b2=document.getElementById('sum-b-2fa');
+  i2.className='st-icon';b2.className='sbadge';
+  if(twofaDone){
+    i2.classList.add('done');i2.textContent='✓';
+    d2.textContent='Two-factor authentication enabled';b2.textContent='Done';
+  } else {
+    i2.classList.add('pending');i2.textContent='';
+    d2.textContent='Not completed';b2.textContent='Recommended';
+  }
 }
 // Step number reflects whether the SUSPICIOUS entry in each group was removed.
 // suspiciousDone: suspicious entry removed -> checkmark
@@ -417,12 +430,14 @@ function markBtn(btn,label,group,isSuspicious){
   if(isSuspicious){ suspiciousDone[group]=true; }
   refreshNum(group);
 }
-// Recommended (not one of the three numbered remediation actions), so it
-// stays out of the pk/ss/pw state the summary is built from.
+// Recommended action: tracked separately from the three numbered
+// remediation actions (pk/ss/pw), which drive the step badges.
+var twofaDone=false;
 function setup2fa(btn){
   btn.textContent='✓ Set up';
   btn.classList.add('done');
   btn.onclick=null;
+  twofaDone=true;
 }
 function resetPw(btn){
   btn.textContent='✓ Password reset';
