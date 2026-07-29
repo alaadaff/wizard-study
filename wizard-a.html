@@ -133,6 +133,13 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .pw-btn{width:100%;padding:12px;border-radius:8px;border:none;background-color:#1c1c1a;color:#ffffff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
 .pw-btn.done{background-color:#f7f6f2;color:#98978f;border:1px solid #e4e3dd;cursor:default}
 
+/* Recommended band */
+.rec-band{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden;margin-top:4px}
+.rec-hdr{background:#f7f6f2;padding:11px 16px;border-bottom:1px solid #e4e3dd;font-size:13px;font-weight:600;color:#1c1c1a}
+.rec-row{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff}
+.rec-name{flex:1;font-size:14px;font-weight:600;color:#1c1c1a}
+.rec-sub{font-size:11px;color:#98978f;margin-top:1px;font-weight:400}
+
 /* Summary */
 .sum-band{border:1px solid #e4e3dd;border-radius:8px;overflow:hidden}
 .status-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #e4e3dd}
@@ -314,7 +321,16 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
     </div>
 
-    <div style="font-size:12px;color:#98978f;line-height:1.6;text-align:center">A confirmation will be sent to <span class="em" data-u="alice" data-d="email.com" style="font-weight:600;color:#58584f"></span> for each completed action.</div>
+    <!-- Recommended -->
+    <div class="rec-band">
+      <div class="rec-hdr">Recommended</div>
+      <div class="rec-row">
+        <div class="rec-name">Set up two-factor authentication<div class="rec-sub">Adds a second step to every sign-in on your account.</div></div>
+        <button class="entry-btn" onclick="setup2fa(this)">Set up</button>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:#98978f;line-height:1.6;text-align:center">A confirmation email will be sent for each completed action.</div>
   </div>
   <div class="footer">
     <button class="btn" onclick="go('s3')">Continue to summary →</button>
@@ -401,6 +417,13 @@ function markBtn(btn,label,group,isSuspicious){
   if(isSuspicious){ suspiciousDone[group]=true; }
   refreshNum(group);
 }
+// Recommended (not one of the three numbered remediation actions), so it
+// stays out of the pk/ss/pw state the summary is built from.
+function setup2fa(btn){
+  btn.textContent='✓ Set up';
+  btn.classList.add('done');
+  btn.onclick=null;
+}
 function resetPw(btn){
   btn.textContent='✓ Password reset';
   btn.classList.add('done');
@@ -413,7 +436,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=3"></script>
+<script src="study.js?v=4"></script>
 <script>Study.initWizard("A");</script>
 </body>
 </html>
