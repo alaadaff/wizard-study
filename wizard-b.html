@@ -423,8 +423,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
       <div class="sess-panel" id="p3p0">
         <div class="sess-summary">This session started on Mar 19, 2026 at 11:10 AM and is currently active. During this session, a new passkey was added to your account.</div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added <span class="trig-badge">Triggering event</span></div><div class="ev-sub">Google Password Manager</div></div><div class="ev-time">2:34 PM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div></div><div class="ev-time">11:10 AM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added <span class="trig-badge">Triggering event</span></div><div class="ev-sub">Google Password Manager · New York, NY</div></div><div class="ev-time">Mar 19, 2026 · 2:34 PM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Mar 19, 2026 · 11:10 AM</div></div>
       </div>
     </div>
 
@@ -440,9 +440,9 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       </div>
       <div class="sess-panel" id="p3p2">
         <div class="sess-summary">This session started on Nov 12, 2025 at 3:05 PM and ended at 5:48 PM. During this session, a new passkey was added to your account.</div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-out</div></div><div class="ev-time">5:48 PM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added</div><div class="ev-sub">iCloud Keychain</div></div><div class="ev-time">3:20 PM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div></div><div class="ev-time">3:05 PM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-out</div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Nov 12, 2025 · 5:48 PM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added</div><div class="ev-sub">iCloud Keychain · New York, NY</div></div><div class="ev-time">Nov 12, 2025 · 3:20 PM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Nov 12, 2025 · 3:05 PM</div></div>
       </div>
     </div>
   </div>
@@ -621,9 +621,9 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <!-- Next steps -->
     <div class="rec-band">
       <div class="rec-hdr"><div class="rec-hdr-title">Next steps you might consider</div></div>
-      <div class="rec-row" onclick="">
+      <div class="rec-row">
         <div style="flex:1"><div class="rec-name">Check 2FA</div></div>
-        <div style="font-size:12px;color:#98978f">→</div>
+        <button class="so-btn" onclick="setup2fa(this)">Set up</button>
       </div>
     </div>
 
@@ -708,7 +708,7 @@ function buildSummary(){
     rows.push({done:done,text:done?'Signed out of '+name:name+' still signed in'});
   });
   rows.push({done:pwChanged,text:pwChanged?'Password changed':'Password not changed'});
-  rows.push({done:false,text:'Two-factor authentication not set up'});
+  rows.push({done:twofaDone,text:twofaDone?'Two-factor authentication set up':'Two-factor authentication not set up'});
   rows.forEach(function(r){
     var div=document.createElement('div');
     div.className='status-row'+(r.done?'':' pend-row');
@@ -765,6 +765,16 @@ function togSessFlag(cardId,checked){
   document.getElementById(cardId).classList.toggle('flagged-s',checked);
   if(cardId==='p3sc0')sessFlags.pixel=checked;
   if(cardId==='p3sc2')sessFlags.macbook=checked;
+}
+
+var twofaDone=false;
+function setup2fa(btn){
+  btn.textContent='✓ Set up';
+  btn.style.backgroundColor='#f7f6f2';
+  btn.style.color='#98978f';
+  btn.style.cursor='default';
+  btn.onclick=null;
+  twofaDone=true;
 }
 
 var pwChanged=false;
@@ -839,7 +849,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=5"></script>
+<script src="study.js?v=6"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>
