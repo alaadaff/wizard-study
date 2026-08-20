@@ -26,6 +26,11 @@ var Study = (function () {
   };
   var KEY = "asw-study-v1";
 
+  // Bumped on every deploy. Appended to the pages we navigate to so a
+  // participant who already visited never gets a stale cached copy.
+  var ASSET_V = "9";
+  function v(file) { return file + (file.indexOf("?") < 0 ? "?v=" : "&v=") + ASSET_V; }
+
   /* ── session state ──────────────────────────────────────── */
   var state = null;
   var page = "unknown";      // "A" | "B" | "index" | "interlude" | "done"
@@ -192,11 +197,11 @@ var Study = (function () {
         log("study", "part1_resumed", null);
         saveState();
         flush();
-        location.replace(WIZARDS[state.order[0]].file);
+        location.replace(v(WIZARDS[state.order[0]].file));
         return;
       }
-      if (samePerson && s.part === 1) { location.replace("interlude.html"); return; }
-      if (samePerson && s.part >= 2 && pid) { location.replace("done.html"); return; }
+      if (samePerson && s.part === 1) { location.replace(v("interlude.html")); return; }
+      if (samePerson && s.part >= 2 && pid) { location.replace(v("done.html")); return; }
       state = newState(pid, WIZARDS[w] ? w : "");
       log("study", "begin", {
         order: state.order.map(function (c) { return WIZARDS[c].label; }),
@@ -205,7 +210,7 @@ var Study = (function () {
       });
       saveState();
       flush();
-      location.replace(WIZARDS[state.order[0]].file);
+      location.replace(v(WIZARDS[state.order[0]].file));
     },
 
     // part2.html — continue the session in the same browser (the other
@@ -217,7 +222,7 @@ var Study = (function () {
       var w = getParam("w").toUpperCase();
       var s = loadState();
       var samePerson = s && !s.test && (!pid || pid === s.pid);
-      if (samePerson && s.part >= 2) { location.replace("done.html"); return; }
+      if (samePerson && s.part >= 2) { location.replace(v("done.html")); return; }
       if (samePerson) {
         state = s;
         if (state.part === 0) log("study", "part2_opened_before_part1_finished", null);
@@ -225,7 +230,7 @@ var Study = (function () {
         log("study", "part2_started", null);
         saveState();
         flush();
-        location.replace(WIZARDS[state.order[1]].file);
+        location.replace(v(WIZARDS[state.order[1]].file));
         return;
       }
       // No session found (different browser/device than part 1):
@@ -238,7 +243,7 @@ var Study = (function () {
       });
       saveState();
       flush();
-      location.replace(WIZARDS[state.order[1]].file);
+      location.replace(v(WIZARDS[state.order[1]].file));
     },
 
     // Called at the bottom of each wizard page.
@@ -278,7 +283,7 @@ var Study = (function () {
       state.part += 1;
       saveState();
       flush();
-      location.href = state.part < state.order.length ? "interlude.html" : "done.html";
+      location.href = v(state.part < state.order.length ? "interlude.html" : "done.html");
     },
 
     // done.html — mark complete, final flush.
