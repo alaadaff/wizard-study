@@ -179,9 +179,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .pk-id{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;padding:3px 9px;border-radius:6px;border:1.5px solid #1c1c1a;color:#1c1c1a;background:#fff;white-space:nowrap}
 
 /* Flat remediation list (Step 3) */
-.act-list{display:flex;flex-direction:column;gap:14px}
-.act-group{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden}
-.act-group-hdr{background:#f7f6f2;padding:11px 14px;border-bottom:1px solid #e4e3dd;font-size:13px;font-weight:600;color:#1c1c1a}
+.act-list{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden}
 .act-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #e4e3dd;background:#fff}
 .act-row:last-child{border-bottom:none}
 .act-row-main{flex:1;min-width:0}
@@ -192,6 +190,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .act-empty{padding:14px 16px;font-size:12px;color:#98978f;line-height:1.55;background:#fff}
 
 /* What happens next — notification warning */
+.notif-warn{display:flex;gap:8px;align-items:flex-start;background:#fffbf0;border:1px solid #e8d88a;border-radius:8px;padding:9px 12px}
+.notif-warn-text{font-size:12px;color:#58584f;line-height:1.5}
 
 /* Inline password form inside the flat list */
 .pw-inline{display:none;padding:0 16px 16px;background:#fff;border-bottom:1px solid #e4e3dd}
@@ -584,6 +584,9 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     </div>
 
     <!-- Tell people exactly what happens when they act -->
+    <div class="notif-warn">
+      <svg width="14" height="13" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
+      <div class="notif-warn-text">A confirmation email is sent to your email.</div>
     </div>
 
     <div class="act-list" id="actionList"></div>
@@ -694,11 +697,9 @@ function buildSecureStep(){
   var host=document.getElementById('actionList');
   host.innerHTML='';
 
-  // Actions are grouped under the login they belong to, mirroring Step 2,
-  // but without the narrative summary or the event timeline.
+  // One flat list, coalescing every action across all flagged logins.
   f.forEach(function(k){
-    var g=addGroup(host,'Login on '+DEVICES[k].name);
-    addActionRow(g,{
+    addActionRow(host,{
       key:'pk-'+k,
       title:'Remove passkey',
       chip:PASSKEYS[k].id,
@@ -708,43 +709,31 @@ function buildSecureStep(){
       done:'Removed',
       confirm:'Do you want to remove '+PASSKEYS[k].id+'?'
     });
-    addActionRow(g,{
+  });
+  f.forEach(function(k){
+    addActionRow(host,{
       key:'dev-'+k,
-      title:'Log out this device',
-      sumDone:'Logged out of '+DEVICES[k].name.split(' \u00b7 ')[0],
-      sumUndone:'Did not log out of '+DEVICES[k].name.split(' \u00b7 ')[0],
+      title:'Log out '+DEVICES[k].name,
+      sumDone:'Logged out of '+DEVICES[k].name.split(' · ')[0],
+      sumUndone:'Did not log out of '+DEVICES[k].name.split(' · ')[0],
       btn:'Log out',
       done:'Logged out',
-      confirm:'Do you want to log out '+DEVICES[k].name.split(' \u00b7 ')[0]+'?'
+      confirm:'Do you want to log out '+DEVICES[k].name.split(' · ')[0]+'?'
     });
   });
-
-  // The password is account-wide, so it sits in its own group.
-  var acct=addGroup(host,'Your account');
-  if(!f.length){
-    var note=document.createElement('div');
-    note.className='act-empty';
-    note.textContent='You did not flag any logins, so there are no passkeys or devices to act on.';
-    acct.appendChild(note);
-  }
-  addActionRow(acct,{
+  addActionRow(host,{
     key:'pw',
     title:'Change password',
     btn:'Change',
     done:'Password changed',
     password:true
   });
-}
-
-function addGroup(host,title){
-  var g=document.createElement('div');
-  g.className='act-group';
-  var h=document.createElement('div');
-  h.className='act-group-hdr';
-  h.textContent=title;
-  g.appendChild(h);
-  host.appendChild(g);
-  return g;
+  if(!f.length){
+    var note=document.createElement('div');
+    note.className='act-empty';
+    note.textContent='You did not flag any logins, so there are no passkeys or devices to act on. You can still change your password below.';
+    host.insertBefore(note,host.firstChild);
+  }
 }
 
 function addActionRow(host,cfg){
