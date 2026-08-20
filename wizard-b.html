@@ -184,7 +184,6 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .act-row:last-child{border-bottom:none}
 .act-row-main{flex:1;min-width:0}
 .act-row-title{font-size:14px;color:#1c1c1a;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.act-row-sub{font-size:11px;color:#98978f;margin-top:3px;line-height:1.5}
 .act-row-btn{padding:8px 18px;border-radius:7px;border:1px solid #d0cfc8;background:#fff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .act-row-btn:hover{background:#f7f6f2}
 .act-row-btn.is-done{background:#f7f6f2;color:#98978f;cursor:default}
@@ -587,13 +586,10 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <!-- Tell people exactly what happens when they act -->
     <div class="notif-warn">
       <svg width="14" height="13" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
-      <div class="notif-warn-text">Each action takes effect immediately and a confirmation email is sent to your email.</div>
+      <div class="notif-warn-text">A confirmation email is sent to your email.</div>
     </div>
 
-    <div>
-      <div class="steps-label" id="actionsLabel">You can consider the following actions</div>
-      <div class="act-list" id="actionList"></div>
-    </div>
+    <div class="act-list" id="actionList"></div>
 
     <div class="rec-band">
       <div class="rec-hdr"><div class="rec-hdr-title">Other things you might consider</div></div>
@@ -698,12 +694,8 @@ function buildSecureStep(){
   }
   document.getElementById('secureFound').textContent=found;
 
-  var label=document.getElementById('actionsLabel');
   var host=document.getElementById('actionList');
   host.innerHTML='';
-  label.textContent=f.length
-    ? 'You can consider the following actions to prevent access by whoever performed these logins'
-    : 'You can consider the following actions';
 
   // One flat list, coalescing every action across all flagged logins.
   f.forEach(function(k){
@@ -713,7 +705,6 @@ function buildSecureStep(){
       chip:PASSKEYS[k].id,
       sumDone:'Removed '+PASSKEYS[k].id,
       sumUndone:'Did not remove '+PASSKEYS[k].id,
-      sub:'Stored in '+PASSKEYS[k].mgr+' · added '+PASSKEYS[k].created,
       btn:'Remove',
       done:'Removed',
       confirm:'Do you want to remove '+PASSKEYS[k].id+'?'
@@ -723,7 +714,6 @@ function buildSecureStep(){
     addActionRow(host,{
       key:'dev-'+k,
       title:'Log out '+DEVICES[k].name,
-      sub:DEVICES[k].range+' · '+DEVICES[k].status,
       sumDone:'Logged out of '+DEVICES[k].name.split(' · ')[0],
       sumUndone:'Did not log out of '+DEVICES[k].name.split(' · ')[0],
       btn:'Log out',
@@ -734,7 +724,6 @@ function buildSecureStep(){
   addActionRow(host,{
     key:'pw',
     title:'Change password',
-    sub:'Anyone using your current password will be signed out.',
     btn:'Change',
     done:'Password changed',
     password:true
@@ -763,9 +752,7 @@ function addActionRow(host,cfg){
     chip.className='pk-id';chip.textContent=cfg.chip;
     t.appendChild(chip);
   }
-  var sub=document.createElement('div');
-  sub.className='act-row-sub';sub.textContent=cfg.sub;
-  main.appendChild(t);main.appendChild(sub);
+  main.appendChild(t);
   var btn=document.createElement('button');
   btn.className='act-row-btn';btn.textContent=cfg.btn;
   btn.setAttribute('data-done-label',cfg.done);
