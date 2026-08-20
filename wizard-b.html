@@ -175,6 +175,30 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .so-meta{font-size:11px;color:#98978f;margin-top:1px}
 .so-btn{padding:7px 14px;border-radius:7px;border:1px solid #d0cfc8;background-color:#ffffff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
 
+/* Passkey identifier — service-assigned label, shown everywhere the passkey appears */
+.pk-id{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;padding:3px 9px;border-radius:6px;border:1.5px solid #1c1c1a;color:#1c1c1a;background:#fff;white-space:nowrap}
+
+/* Flat remediation list (Step 3) */
+.act-list{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden}
+.act-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #e4e3dd;background:#fff}
+.act-row:last-child{border-bottom:none}
+.act-row-main{flex:1;min-width:0}
+.act-row-title{font-size:14px;color:#1c1c1a;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.act-row-sub{font-size:11px;color:#98978f;margin-top:3px;line-height:1.5}
+.act-row-btn{padding:8px 18px;border-radius:7px;border:1px solid #d0cfc8;background:#fff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.act-row-btn:hover{background:#f7f6f2}
+.act-row-btn.is-done{background:#f7f6f2;color:#98978f;cursor:default}
+.act-empty{padding:14px 16px;font-size:12px;color:#98978f;line-height:1.55;background:#fff}
+
+/* What happens next — notification warning */
+.notif-warn{display:flex;gap:10px;align-items:flex-start;background:#fffbf0;border:1px solid #e8d88a;border-radius:8px;padding:12px 14px}
+.notif-warn-title{font-size:13px;font-weight:600;color:#1c1c1a;margin-bottom:3px}
+.notif-warn-text{font-size:12px;color:#58584f;line-height:1.6}
+
+/* Inline password form inside the flat list */
+.pw-inline{display:none;padding:0 16px 16px;background:#fff;border-bottom:1px solid #e4e3dd}
+.pw-inline.open{display:block}
+
 /* Recommended */
 .rec-band{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden}
 .rec-hdr{background:#f7f6f2;padding:11px 14px;border-bottom:1px solid #e4e3dd}
@@ -307,14 +331,14 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
       <div><span class="gm-s-name">Noogle</span> <span class="gm-s-email">&lt;account@noogle.com&gt;</span></div>
       <div class="gm-to">to me ▾</div>
     </div>
-    <div class="gm-meta"><span>Mar 19, 2026, 2:34 PM (4 hours ago)</span><span>☆</span><span>↩</span><span>⋮</span></div>
+    <div class="gm-meta"><span>Aug 19, 2026, 2:34 PM (4 hours ago)</span><span>☆</span><span>↩</span><span>⋮</span></div>
   </div>
   <div class="e-content">
-    <div class="e-body">A new passkey was added to your account. A passkey is a passwordless sign-in method that allows sign-in to your account without using the password.</div>
+    <div class="e-body">A new passkey was added to your account. This is the second passkey registered to your account. A passkey is a passwordless sign-in method that allows sign-in to your account without using the password.</div>
     <div class="e-card">
-      <div><div class="e-dlabel">When</div><div class="e-dvalue">Mar 19, 2026 · 2:34 PM</div></div>
+      <div><div class="e-dlabel">When</div><div class="e-dvalue">Aug 19, 2026 · 2:34 PM</div></div>
       <div><div class="e-dlabel">Device</div><div class="e-dvalue">Google Pixel · Android · Chrome</div></div>
-      <div><div class="e-dlabel">Passkey manager</div><div class="e-dvalue">Google Password Manager</div></div>
+      <div><div class="e-dlabel">Passkey manager</div><div class="e-dvalue">Google Password Manager <span class="pk-id">Passkey #2</span></div></div>
       <div><div class="e-dlabel">Location</div><div class="e-dvalue">New York, NY</div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
@@ -352,7 +376,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div style="font-size:14px;color:#58584f;line-height:1.7">This wizard will guide you through a few steps to help you understand recent activity on your account and take action if needed.</div>
   </div>
   <div class="body">
-    <div class="pill"><div class="pill-dot"></div><div class="pill-text">A new passkey was added to your account on Mar 19, 2026 at 2:34 PM</div></div>
+    <div class="pill"><div class="pill-dot"></div><div class="pill-text">A new passkey was added to your account on Aug 19, 2026 at 2:34 PM</div></div>
     <div>
       <div class="steps-label">What we'll do together</div>
       <div class="steps-list">
@@ -378,9 +402,9 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="body">
     <div class="attr-grid">
       <div class="attr-row"><div class="ak">Action</div><div class="av">Passkey added</div></div>
-      <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager<span class="info-ic">i<span class="info-tip">A passkey manager stores passkeys — passwordless credentials used to sign in to your account. Google Password Manager and iCloud Keychain are examples.</span></span></div></div>
-      <div class="attr-row"><div class="ak">When</div><div class="av">Mar 19, 2026 · 2:34 PM · EST</div></div>
-      <div class="attr-row"><div class="ak">Last used</div><div class="av">Mar 19, 2026 · 5:00 PM · EST</div></div>
+      <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager <span class="pk-id">Passkey #2</span><span class="info-ic">i<span class="info-tip">A passkey manager stores passkeys — passwordless credentials used to sign in to your account. Google Password Manager and iCloud Keychain are examples.</span></span></div></div>
+      <div class="attr-row"><div class="ak">When</div><div class="av">Aug 19, 2026 · 2:34 PM · EST</div></div>
+      <div class="attr-row"><div class="ak">Last used</div><div class="av">Aug 19, 2026 · 5:00 PM · EST</div></div>
       <div class="attr-row"><div class="ak">Device</div><div class="av">Google Pixel · Android · Chrome<span class="info-ic">i<span class="info-tip">The device, operating system, and browser associated with this activity. This is an estimate and may not be accurate.</span></span></div></div>
       <div class="attr-row"><div class="ak">Where &amp; how</div><div class="av">New York, NY · 192.168.0.1<span class="info-ic">i<span class="info-tip">The estimated location and IP address this activity came from. This is an estimate and may not be accurate.</span></span></div></div>
     </div>
@@ -417,22 +441,22 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 <div class="screen" id="s3-review">
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s2-diag')">←</div><div class="plabel">Step 2 of 3</div><div class="ptrack"><div class="pfill" style="width:66%"></div></div><div class="pstep">Review activity</div></div>
-  <div class="page-header"><div class="step-tag">Step 2 — Review activity</div><div class="page-title">Review your account activity</div><div class="page-sub">Identify activity you don't recognise. A login is a period of access to your account from one device, starting when someone signs in and ending when they sign out.</div></div>
+  <div class="page-header"><div class="step-tag">Step 2 — Review activity</div><div class="page-title">Review your account activity</div><div class="page-sub">Identify activity you don't recognise. A login is a period of access to your account from one device, starting when someone signs in and ending when they are signed out or the session expires. If you are unsure about a login, mark <strong style="color:#1c1c1a;font-weight:600">No</strong>.</div></div>
   <div class="body">
 
     <!-- Login 1: Google Pixel — the login the alert came from -->
     <div class="session-card is-source" id="p3sc0">
       <div class="session-hdr" onclick="toggleSess('p3p0','p3c0')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
-        <div class="dev-info"><div class="dev-name">Login on Google Pixel · Android · Chrome<span class="src-badge">Source of this alert</span></div><div class="dev-meta">New York, NY · Mar 19, 2026 · Currently active</div></div>
+        <div class="dev-info"><div class="dev-name">Login on Google Pixel · Android · Chrome<span class="src-badge">Source of this alert</span></div><div class="dev-meta">New York, NY | Aug 19th &ndash; now | Currently active</div></div>
         <div class="chevron" id="p3c0">▼</div>
       </div>
       <div class="sess-panel" id="p3p0">
-        <div class="sess-summary">This login started on Mar 19, 2026 at 11:10 AM and is currently active. During this login, a new passkey was added to your account.</div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Mar 19, 2026 · 11:10 AM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added</div><div class="ev-sub">Google Password Manager · New York, NY</div></div><div class="ev-time">Mar 19, 2026 · 2:34 PM</div></div>
+        <div class="sess-summary">This login started on Aug 19, 2026 at 11:10 AM and is currently active. During this login, a new passkey was added to your account.</div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Aug 19, 2026 · 11:10 AM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added <span class="pk-id">Passkey #2</span></div><div class="ev-sub">Google Password Manager · New York, NY</div></div><div class="ev-time">Aug 19, 2026 · 2:34 PM</div></div>
         <div class="wty-row">
-          <span class="wty-label">Was this you?</span>
+          <span class="wty-label">Was this you?<span style="display:block;font-size:11px;font-weight:400;color:#98978f;margin-top:2px">Mark No if you're unsure.</span></span>
           <button class="wty-btn" id="wty-pixel-y" onclick="answerWasThisYou('pixel',true)">Yes</button>
           <button class="wty-btn" id="wty-pixel-n" onclick="answerWasThisYou('pixel',false)">No</button>
         </div>
@@ -443,16 +467,16 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="session-card" id="p3sc2">
       <div class="session-hdr" onclick="toggleSess('p3p2','p3c2')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
-        <div class="dev-info"><div class="dev-name">Login on MacBook Pro · macOS · Chrome</div><div class="dev-meta">New York, NY · Nov 12, 2025 · Logged out</div></div>
+        <div class="dev-info"><div class="dev-name">Login on MacBook Pro · macOS · Chrome</div><div class="dev-meta">New York, NY | Jul 28th &ndash; Jul 28th, 2026 | Logged out</div></div>
         <div class="chevron" id="p3c2">▼</div>
       </div>
       <div class="sess-panel" id="p3p2">
-        <div class="sess-summary">This login started on Nov 12, 2025 at 3:05 PM and ended at 5:48 PM. During this login, a new passkey was added to your account.</div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Nov 12, 2025 · 3:05 PM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added</div><div class="ev-sub">iCloud Keychain · New York, NY</div></div><div class="ev-time">Nov 12, 2025 · 3:20 PM</div></div>
-        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-out</div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Nov 12, 2025 · 5:48 PM</div></div>
+        <div class="sess-summary">This login started on Jul 28, 2026 at 3:05 PM and ended at 5:48 PM. During this login, a new passkey was added to your account.</div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-in <span class="auth-badge">via password</span></div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Jul 28, 2026 · 3:05 PM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Passkey added <span class="pk-id">Passkey #1</span></div><div class="ev-sub">iCloud Keychain · New York, NY</div></div><div class="ev-time">Jul 28, 2026 · 3:20 PM</div></div>
+        <div class="ev-row"><div class="ev-info"><div class="ev-name">Sign-out</div><div class="ev-sub">New York, NY</div></div><div class="ev-time">Jul 28, 2026 · 5:48 PM</div></div>
         <div class="wty-row">
-          <span class="wty-label">Was this you?</span>
+          <span class="wty-label">Was this you?<span style="display:block;font-size:11px;font-weight:400;color:#98978f;margin-top:2px">Mark No if you're unsure.</span></span>
           <button class="wty-btn" id="wty-macbook-y" onclick="answerWasThisYou('macbook',true)">Yes</button>
           <button class="wty-btn" id="wty-macbook-n" onclick="answerWasThisYou('macbook',false)">No</button>
         </div>
@@ -481,7 +505,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="session-card">
       <div class="session-hdr" onclick="toggleSess('p4p0','p4c0')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
-        <div class="dev-info"><div class="dev-name">Google Pixel · Android · Chrome</div><div class="dev-meta">New York, NY · Mar 19, 2026 · Currently active</div></div>
+        <div class="dev-info"><div class="dev-name">Google Pixel · Android · Chrome</div><div class="dev-meta">New York, NY | Aug 19th &ndash; now | Currently active</div></div>
         <div class="chevron open" id="p4c0">▼</div>
       </div>
       <div class="sess-panel open" id="p4p0">
@@ -519,11 +543,11 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="session-card">
       <div class="session-hdr" onclick="toggleSess('p4p2','p4c2')">
         <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
-        <div class="dev-info"><div class="dev-name">MacBook Pro · macOS · Chrome</div><div class="dev-meta">New York, NY · Nov 12, 2025</div></div>
+        <div class="dev-info"><div class="dev-name">MacBook Pro · macOS · Chrome</div><div class="dev-meta">New York, NY · Jul 28, 2026</div></div>
         <div class="chevron" id="p4c2">▼</div>
       </div>
       <div class="sess-panel" id="p4p2">
-        <div class="sess-summary">This session started on <strong>Nov 12, 2025</strong> and ended at <strong>5:48 PM</strong>. No account changes were made during this session.</div>
+        <div class="sess-summary">This session started on <strong>Jul 28, 2026</strong> and ended at <strong>5:48 PM</strong>. No account changes were made during this session.</div>
         <div class="action-item">
           <div class="action-q">Do you want to sign out this MacBook Pro login?</div>
           <div class="cons-row">
@@ -553,87 +577,30 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 <div class="screen" id="s5-secure">
   <div class="top-bar"><div class="logo-row"><div class="logo-mark">N</div><div class="logo-name">Noogle</div></div><div class="top-tag">Account security wizard</div></div>
   <div class="pbar"><div class="back-btn" onclick="go('s3-review')">←</div><div class="plabel">Step 3 of 3</div><div class="ptrack"><div class="pfill" style="width:90%"></div></div><div class="pstep">Secure account</div></div>
-  <div class="page-header"><div class="step-tag">Step 3 — Secure account</div><div class="page-title">Secure your account</div><div class="page-sub">Expand an item to take action.</div></div>
+  <div class="page-header"><div class="step-tag">Step 3 — Secure account</div><div class="page-title">Secure your account</div><div class="page-sub">Review what we found and choose which actions to take.</div></div>
   <div class="body">
 
+    <!-- Summary block: rewritten on entry from what the user reported -->
     <div class="sum-band">
-      <div class="sum-hdr"><div class="sum-label">What we found</div><div class="sum-text">A new sign-in was detected on a Google Pixel on Mar 19, 2026 at 11:10 AM. During that login, a new passkey was added and stored in Google Password Manager.</div></div>
+      <div class="sum-hdr"><div class="sum-label">What we found</div><div class="sum-text" id="secureFound"></div></div>
     </div>
 
-    <!-- Action 1: Check passkeys -->
-    <div class="secure-item">
-      <div class="secure-hdr" onclick="toggleSess('sp0','sc0')">
-        <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10h-8.35C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H13l2 2 2-2 2 2 4-4.04L21 10zM7 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="#555"/></svg></div>
-        <div><div class="secure-title">Check passkeys</div></div>
-        <div class="chevron" id="sc0">▼</div>
-      </div>
-      <div class="secure-panel" id="sp0">
-        <div class="settings-ui">
-          <div class="passkey-entry" data-sess="pixel">
-            <div style="width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
-            <div class="pk-info">
-              <div class="pk-name">Google Password Manager</div>
-              <div class="pk-meta">Created: March 19, 2026, 2:34 PM<br>Last used: Mar 19, 2026, 5:00 PM, Chrome on Android in New York, NY, USA</div>
-            </div>
-            <button class="pk-remove" onclick="confirmAction(this,'Removed')">Remove</button>
-          </div>
-          <div class="passkey-entry" data-sess="macbook">
-            <div style="width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#555"/></svg></div>
-            <div class="pk-info">
-              <div class="pk-name">iCloud Keychain</div>
-              <div class="pk-meta">Created: November 12, 2025, 3:20 PM<br>Last used: March 12, 2026, Chrome on macOS in New York, NY, USA</div>
-            </div>
-            <button class="pk-remove" onclick="confirmAction(this,'Removed')">Remove</button>
-          </div>
-          <div class="pw-empty" id="passkeys-empty" style="display:none">No flagged passkeys to review.</div>
-        </div>
+    <!-- Tell people exactly what happens when they act -->
+    <div class="notif-warn">
+      <svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
+      <div>
+        <div class="notif-warn-title">What happens when you take these actions</div>
+        <div class="notif-warn-text">Each action takes effect immediately and a confirmation email is sent to <strong><span class="em" data-u="alice" data-d="email.com"></span></strong>. Revoking a passkey or logging out a device removes that access straight away, so whoever is using it will be signed out. If that person can read your email, they will see the confirmation.</div>
       </div>
     </div>
 
-    <!-- Action 2: Check devices -->
-    <div class="secure-item">
-      <div class="secure-hdr" onclick="toggleSess('sp1','sc1')">
-        <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
-        <div><div class="secure-title">Check devices</div></div>
-        <div class="chevron" id="sc1">▼</div>
-      </div>
-      <div class="secure-panel" id="sp1">
-        <div class="settings-ui">
-          <div class="signout-entry" data-sess="pixel">
-            <div style="width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg></div>
-            <div class="so-info"><div class="so-name">Google Pixel · Android · Chrome</div><div class="so-meta">New York, NY · Mar 19, 2026 · Active now</div></div>
-            <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
-          </div>
-          <div class="signout-entry" data-sess="macbook">
-            <div style="width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg></div>
-            <div class="so-info"><div class="so-name">MacBook Pro · macOS · Chrome</div><div class="so-meta">New York, NY · Nov 12, 2025</div></div>
-            <button class="so-btn" onclick="confirmAction(this,'Signed out')">Sign out</button>
-          </div>
-          <div class="pw-empty" id="devices-empty" style="display:none">No flagged devices to review.</div>
-        </div>
-      </div>
+    <div>
+      <div class="steps-label" id="actionsLabel">You can consider the following actions</div>
+      <div class="act-list" id="actionList"></div>
     </div>
 
-    <!-- Action 3: Check password -->
-    <div class="secure-item">
-      <div class="secure-hdr" onclick="toggleSess('sp2','sc2')">
-        <div class="dev-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 1 1 6 0v3z" fill="#555"/></svg></div>
-        <div><div class="secure-title">Check password</div></div>
-        <div class="chevron" id="sc2">▼</div>
-      </div>
-      <div class="secure-panel" id="sp2">
-        <div class="settings-ui">
-          <div class="settings-sub">Change your password. Anyone using your current password will be signed out.</div>
-          <div class="pw-field"><div class="pw-label">Current password</div><input type="password" class="pw-input" placeholder="Enter current password"></div>
-          <div class="pw-field"><div class="pw-label">New password</div><input type="password" class="pw-input" placeholder="Enter new password"></div>
-          <button class="pw-btn" onclick="changePw(this)">Change password</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Next steps -->
     <div class="rec-band">
-      <div class="rec-hdr"><div class="rec-hdr-title">Next steps you might consider</div></div>
+      <div class="rec-hdr"><div class="rec-hdr-title">Other things you might consider</div></div>
       <div class="rec-row">
         <div style="flex:1"><div class="rec-name">Check 2FA</div></div>
         <button class="so-btn" onclick="setup2fa(this)">Set up</button>
@@ -660,7 +627,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="page-header"><div class="step-tag">Summary of changes</div><div class="page-title">Here's what changed on your account</div><div class="page-sub">A summary of changes to your account during this remediation session.</div></div>
   <div class="body">
     <div class="sum-band">
-      <div class="sum-hdr"><div class="sum-label">What we found</div><div class="sum-text">A new sign-in was detected on a Google Pixel on Mar 19, 2026 at 11:10 AM. During that login, a new passkey was added and stored in Google Password Manager.</div></div>
+      <div class="sum-hdr"><div class="sum-label">What we found</div><div class="sum-text" id="sumFound"></div></div>
       <div id="sumRows"></div>
     </div>
     <div>
@@ -697,30 +664,153 @@ function go(id){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
-  if(id==='s5-secure'){applyFlagFilter();}
+  if(id==='s5-secure'){buildSecureStep();}
   if(id==='s6-summary'){buildSummary();}
 }
+// ── Account model ───────────────────────────────────────────
+// Passkeys carry a service-assigned identifier so people can tell
+// them apart; icons are not a reliable identifier because the same
+// passkey manager can hold several.
+var PASSKEYS={
+  macbook:{id:'Passkey #1',mgr:'iCloud Keychain',created:'Jul 28, 2026, 3:20 PM'},
+  pixel:  {id:'Passkey #2',mgr:'Google Password Manager',created:'Aug 19, 2026, 2:34 PM'}
+};
+var DEVICES={
+  pixel:  {name:'Google Pixel · Android · Chrome',range:'Aug 19th – now',status:'Currently active'},
+  macbook:{name:'MacBook Pro · macOS · Chrome',range:'Jul 28th – Jul 28th, 2026',status:'Logged out'}
+};
+var ORDER=['pixel','macbook'];
 
-// Builds the summary from what the participant actually did: only the
-// items surfaced in Step 3 (i.e. from logins they flagged) are
-// reported, each as completed or not.
+// Which logins the participant answered "No" to in Step 2.
+var sessFlags={pixel:false,macbook:false};
+var pwChangedFlag=false;
+
+function flagged(){return ORDER.filter(function(k){return sessFlags[k];});}
+
+// ── Step 3 ──────────────────────────────────────────────────
+// Summary text and the action list are both rebuilt on entry, so they
+// reflect what the participant reported rather than a fixed script.
+function buildSecureStep(){
+  var f=flagged();
+  var found='A new passkey, '+PASSKEYS.pixel.id+', was added to your account on '+PASSKEYS.pixel.created+'.';
+  if(f.length===0){
+    found+=' You told us you recognise all of the logins on your account.';
+  } else if(f.length===1){
+    found+=' You told us you don\'t recognise the login on '+DEVICES[f[0]].name.split(' · ')[0]+'.';
+  } else {
+    found+=' You told us you don\'t recognise these logins: '+f.map(function(k){return DEVICES[k].name.split(' · ')[0];}).join(' and ')+'.';
+  }
+  document.getElementById('secureFound').textContent=found;
+
+  var label=document.getElementById('actionsLabel');
+  var host=document.getElementById('actionList');
+  host.innerHTML='';
+  label.textContent=f.length
+    ? 'You can consider the following actions to prevent access by whoever performed these logins'
+    : 'You can consider the following actions';
+
+  // One flat list, coalescing every action across all flagged logins.
+  f.forEach(function(k){
+    addActionRow(host,{
+      key:'pk-'+k,
+      title:'Revoke passkey',
+      chip:PASSKEYS[k].id,
+      sumDone:'Revoked '+PASSKEYS[k].id,
+      sumUndone:'Did not revoke '+PASSKEYS[k].id,
+      sub:'Stored in '+PASSKEYS[k].mgr+' · added '+PASSKEYS[k].created,
+      btn:'Revoke',
+      done:'Revoked',
+      confirm:'Do you want to revoke '+PASSKEYS[k].id+'?'
+    });
+  });
+  f.forEach(function(k){
+    addActionRow(host,{
+      key:'dev-'+k,
+      title:'Log out '+DEVICES[k].name,
+      sub:DEVICES[k].range+' · '+DEVICES[k].status,
+      sumDone:'Logged out of '+DEVICES[k].name.split(' · ')[0],
+      sumUndone:'Did not log out of '+DEVICES[k].name.split(' · ')[0],
+      btn:'Log out',
+      done:'Logged out',
+      confirm:'Do you want to log out '+DEVICES[k].name.split(' · ')[0]+'?'
+    });
+  });
+  addActionRow(host,{
+    key:'pw',
+    title:'Change password',
+    sub:'Anyone using your current password will be signed out.',
+    btn:'Change',
+    done:'Password changed',
+    password:true
+  });
+  if(!f.length){
+    var note=document.createElement('div');
+    note.className='act-empty';
+    note.textContent='You did not flag any logins, so there are no passkeys or devices to act on. You can still change your password below.';
+    host.insertBefore(note,host.firstChild);
+  }
+}
+
+function addActionRow(host,cfg){
+  var row=document.createElement('div');
+  row.className='act-row';
+  row.setAttribute('data-key',cfg.key);
+  if(cfg.sumDone)row.setAttribute('data-sum-done',cfg.sumDone);
+  if(cfg.sumUndone)row.setAttribute('data-sum-undone',cfg.sumUndone);
+  var main=document.createElement('div');
+  main.className='act-row-main';
+  var t=document.createElement('div');
+  t.className='act-row-title';
+  t.textContent=cfg.title;
+  if(cfg.chip){
+    var chip=document.createElement('span');
+    chip.className='pk-id';chip.textContent=cfg.chip;
+    t.appendChild(chip);
+  }
+  var sub=document.createElement('div');
+  sub.className='act-row-sub';sub.textContent=cfg.sub;
+  main.appendChild(t);main.appendChild(sub);
+  var btn=document.createElement('button');
+  btn.className='act-row-btn';btn.textContent=cfg.btn;
+  btn.setAttribute('data-done-label',cfg.done);
+  if(cfg.password){
+    btn.onclick=function(){togglePwForm(btn);};
+  } else {
+    btn.onclick=function(){confirmAction(btn,cfg.done,cfg.confirm);};
+  }
+  row.appendChild(main);row.appendChild(btn);
+  host.appendChild(row);
+  if(cfg.password){
+    var form=document.createElement('div');
+    form.className='pw-inline';form.id='pwInline';
+    form.innerHTML='<div class="pw-field"><div class="pw-label">Current password</div><input type="password" class="pw-input" placeholder="Enter current password"></div>'+
+      '<div class="pw-field"><div class="pw-label">New password</div><input type="password" class="pw-input" placeholder="Enter new password"></div>'+
+      '<button class="pw-btn" onclick="changePw(this)">Change password</button>';
+    host.appendChild(form);
+  }
+}
+
+function togglePwForm(btn){
+  var f=document.getElementById('pwInline');
+  if(!f)return;
+  f.classList.toggle('open');
+}
+
+// ── Summary ─────────────────────────────────────────────────
+// Built from the actions actually taken on the flat list.
 function buildSummary(){
   var host=document.getElementById('sumRows');
   host.innerHTML='';
   var rows=[];
-  document.querySelectorAll('#sp0 .passkey-entry').forEach(function(el){
-    if(!sessFlags[el.getAttribute('data-sess')])return;
-    var name=el.querySelector('.pk-name').textContent.trim();
-    var done=el.querySelector('.pk-remove').classList.contains('is-done');
-    rows.push({done:done,text:done?name+' passkey removed':name+' passkey not removed'});
+  document.querySelectorAll('#actionList .act-row').forEach(function(row){
+    var key=row.getAttribute('data-key');
+    if(key==='pw')return; // reported separately so it reads naturally
+    var btn=row.querySelector('.act-row-btn');
+    var done=btn.classList.contains('is-done');
+    rows.push({done:done,
+               text:done?row.getAttribute('data-sum-done'):row.getAttribute('data-sum-undone')});
   });
-  document.querySelectorAll('#sp1 .signout-entry').forEach(function(el){
-    if(!sessFlags[el.getAttribute('data-sess')])return;
-    var name=el.querySelector('.so-name').textContent.trim();
-    var done=el.querySelector('.so-btn').classList.contains('is-done');
-    rows.push({done:done,text:done?'Signed out of '+name:name+' still signed in'});
-  });
-  rows.push({done:pwChanged,text:pwChanged?'Password changed':'Password not changed'});
+  rows.push({done:pwChangedFlag,text:pwChangedFlag?'Password changed':'Password not changed'});
   rows.push({done:twofaDone,text:twofaDone?'Two-factor authentication set up':'Two-factor authentication not set up'});
   rows.forEach(function(r){
     var div=document.createElement('div');
@@ -731,28 +821,7 @@ function buildSummary(){
     div.querySelector('.st-name').textContent=r.text;
     host.appendChild(div);
   });
-}
-
-// Which logins the participant answered "No" to in Step 2.
-var sessFlags={pixel:false,macbook:false};
-
-// Step 3 only lists passkeys/devices belonging to flagged logins.
-function applyFlagFilter(){
-  var any=false;
-  ['pixel','macbook'].forEach(function(k){ if(sessFlags[k]) any=true; });
-  var shownPk=0,shownDev=0;
-  document.querySelectorAll('#sp0 .passkey-entry').forEach(function(el){
-    var show=sessFlags[el.getAttribute('data-sess')];
-    el.style.display=show?'':'none';
-    if(show)shownPk++;
-  });
-  document.querySelectorAll('#sp1 .signout-entry').forEach(function(el){
-    var show=sessFlags[el.getAttribute('data-sess')];
-    el.style.display=show?'':'none';
-    if(show)shownDev++;
-  });
-  document.getElementById('passkeys-empty').style.display=shownPk?'none':'';
-  document.getElementById('devices-empty').style.display=shownDev?'none':'';
+  document.getElementById('sumFound').textContent=document.getElementById('secureFound').textContent;
 }
 
 var diagSel=null;
@@ -794,14 +863,22 @@ function setup2fa(btn){
   twofaDone=true;
 }
 
-var pwChanged=false;
 function changePw(btn){
   btn.textContent='✓ Password changed';
   btn.style.backgroundColor='#f7f6f2';
   btn.style.color='#98978f';
   btn.style.cursor='default';
   btn.onclick=null;
-  pwChanged=true;
+  pwChangedFlag=true;
+  var row=document.querySelector('#actionList .act-row[data-key="pw"]');
+  if(row){
+    var b=row.querySelector('.act-row-btn');
+    b.textContent='✓ Password changed';
+    b.classList.add('is-done');
+    b.onclick=null;
+  }
+  var f=document.getElementById('pwInline');
+  if(f)f.classList.remove('open');
 }
 
 function selAction(selId,otherId,indId){
@@ -823,15 +900,14 @@ function selAction(selId,otherId,indId){
 }
 
 var pendingBtn=null,pendingLabel=null;
-// Step 1: user clicks Remove / Sign out -> ask for confirmation first.
-function confirmAction(btn,label){
+// The action is only applied after the participant confirms. The
+// caller supplies the question so it names the exact passkey/device.
+function confirmAction(btn,label,question){
   pendingBtn=btn;
   pendingLabel=label;
-  var q=label==='Removed'
-    ? 'Do you want to remove this passkey?'
-    : 'Do you want to terminate this login?';
   document.getElementById('modalText').textContent=
-    'A confirmation will be sent to your email. '+q;
+    'A confirmation email will be sent to your account email. '+
+    (question||'Do you want to take this action?');
   document.getElementById('confirmModal').classList.add('show');
 }
 // Step 2: user confirms in the modal -> the action actually happens.
@@ -844,6 +920,7 @@ function doConfirm(){
     pendingBtn.style.cursor='default';
     pendingBtn.onclick=null;
     pendingBtn.classList.add('is-done');
+    pendingBtn.style.backgroundColor='';pendingBtn.style.color='';pendingBtn.style.border='';
   }
   pendingBtn=null;pendingLabel=null;
   document.getElementById('confirmModal').classList.remove('show');
@@ -866,7 +943,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=7"></script>
+<script src="study.js?v=8"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>
