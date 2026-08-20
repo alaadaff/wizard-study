@@ -191,9 +191,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .act-empty{padding:14px 16px;font-size:12px;color:#98978f;line-height:1.55;background:#fff}
 
 /* What happens next — notification warning */
-.notif-warn{display:flex;gap:10px;align-items:flex-start;background:#fffbf0;border:1px solid #e8d88a;border-radius:8px;padding:12px 14px}
-.notif-warn-title{font-size:13px;font-weight:600;color:#1c1c1a;margin-bottom:3px}
-.notif-warn-text{font-size:12px;color:#58584f;line-height:1.6}
+.notif-warn{display:flex;gap:8px;align-items:flex-start;background:#fffbf0;border:1px solid #e8d88a;border-radius:8px;padding:9px 12px}
+.notif-warn-text{font-size:12px;color:#58584f;line-height:1.5}
 
 /* Inline password form inside the flat list */
 .pw-inline{display:none;padding:0 16px 16px;background:#fff;border-bottom:1px solid #e4e3dd}
@@ -587,11 +586,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
     <!-- Tell people exactly what happens when they act -->
     <div class="notif-warn">
-      <svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
-      <div>
-        <div class="notif-warn-title">What happens when you take these actions</div>
-        <div class="notif-warn-text">Each action takes effect immediately and a confirmation email is sent to <strong><span class="em" data-u="alice" data-d="email.com"></span></strong>. Revoking a passkey or logging out a device removes that access straight away, so whoever is using it will be signed out. If that person can read your email, they will see the confirmation.</div>
-      </div>
+      <svg width="14" height="13" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
+      <div class="notif-warn-text">Each action takes effect immediately and a confirmation email is sent to your email.</div>
     </div>
 
     <div>
@@ -713,14 +709,14 @@ function buildSecureStep(){
   f.forEach(function(k){
     addActionRow(host,{
       key:'pk-'+k,
-      title:'Revoke passkey',
+      title:'Remove passkey',
       chip:PASSKEYS[k].id,
-      sumDone:'Revoked '+PASSKEYS[k].id,
-      sumUndone:'Did not revoke '+PASSKEYS[k].id,
+      sumDone:'Removed '+PASSKEYS[k].id,
+      sumUndone:'Did not remove '+PASSKEYS[k].id,
       sub:'Stored in '+PASSKEYS[k].mgr+' · added '+PASSKEYS[k].created,
-      btn:'Revoke',
-      done:'Revoked',
-      confirm:'Do you want to revoke '+PASSKEYS[k].id+'?'
+      btn:'Remove',
+      done:'Removed',
+      confirm:'Do you want to remove '+PASSKEYS[k].id+'?'
     });
   });
   f.forEach(function(k){
@@ -906,7 +902,7 @@ function confirmAction(btn,label,question){
   pendingBtn=btn;
   pendingLabel=label;
   document.getElementById('modalText').textContent=
-    'A confirmation email will be sent to your account email. '+
+    'A confirmation email will be sent to your email. '+
     (question||'Do you want to take this action?');
   document.getElementById('confirmModal').classList.add('show');
 }
