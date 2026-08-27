@@ -176,7 +176,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .so-btn{padding:7px 14px;border-radius:7px;border:1px solid #d0cfc8;background-color:#ffffff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
 
 /* Passkey identifier — service-assigned label, shown everywhere the passkey appears */
-.pk-id{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;padding:3px 9px;border-radius:6px;border:1.5px solid #1c1c1a;color:#1c1c1a;background:#fff;white-space:nowrap}
+.pk-id{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:20px;background:#eeede8;color:#58584f;border:1px solid #d0cfc8;white-space:nowrap}
 
 /* Flat remediation list (Step 3) */
 .act-list{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden}
@@ -399,8 +399,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="page-header"><div class="step-tag">Step 1 — Confirm activity</div><div class="page-title">Did you add this passkey?</div><div class="page-sub">Review the details and tell us if you recognise this.</div></div>
   <div class="body">
     <div class="attr-grid">
-      <div class="attr-row"><div class="ak">Action</div><div class="av">Passkey added</div></div>
-      <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager <span class="pk-id">Passkey #2</span><span class="info-ic">i<span class="info-tip">A passkey manager stores passkeys — passwordless credentials used to sign in to your account. Google Password Manager and iCloud Keychain are examples.</span></span></div></div>
+      <div class="attr-row"><div class="ak">Action</div><div class="av">A new passkey <span class="pk-id">Passkey #2</span> was added</div></div>
+      <div class="attr-row"><div class="ak">Passkey manager</div><div class="av">Google Password Manager<span class="info-ic">i<span class="info-tip">A passkey manager stores passkeys — passwordless credentials used to sign in to your account. Google Password Manager and iCloud Keychain are examples.</span></span></div></div>
       <div class="attr-row"><div class="ak">When</div><div class="av">Aug 19, 2026 · 2:34 PM · EST</div></div>
       <div class="attr-row"><div class="ak">Last used</div><div class="av">Aug 19, 2026 · 5:00 PM · EST</div></div>
       <div class="attr-row"><div class="ak">Device</div><div class="av">Google Pixel · Android · Chrome<span class="info-ic">i<span class="info-tip">The device, operating system, and browser associated with this activity. This is an estimate and may not be accurate.</span></span></div></div>
@@ -926,7 +926,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=10"></script>
+<script src="study.js?v=11"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>
