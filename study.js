@@ -28,7 +28,7 @@ var Study = (function () {
 
   // Bumped on every deploy. Appended to the pages we navigate to so a
   // participant who already visited never gets a stale cached copy.
-  var ASSET_V = "12";
+  var ASSET_V = "13";
   function v(file) { return file + (file.indexOf("?") < 0 ? "?v=" : "&v=") + ASSET_V; }
 
   /* ── session state ──────────────────────────────────────── */
@@ -135,7 +135,7 @@ var Study = (function () {
   function installHooks() {
     // Wrap the wizard's own functions so choices are logged semantically.
     ["go", "markBtn", "resetPw", "togglePanel", "selDiag", "contDiag",
-     "selAction", "confirmAction", "doConfirm", "toggleSess", "answerWasThisYou",
+     "selAction", "confirmAction", "doConfirm", "applyAction", "toggleSess", "answerWasThisYou",
      "closeModal", "markDone", "changePw", "buildSecureStep", "togglePwForm", "setup2fa"
     ].forEach(function (name) {
       var orig = window[name];

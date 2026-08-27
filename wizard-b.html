@@ -641,15 +641,6 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 
 </div></div>
 
-<div class="modal-overlay" id="confirmModal">
-  <div class="modal-box">
-    <div class="modal-icon">!</div>
-    <div class="modal-title">Confirm this action</div>
-    <div class="modal-text" id="modalText">A confirmation will be sent to your email. Do you want to confirm this action?</div>
-    <button class="modal-btn" onclick="doConfirm()">Confirm</button>
-    <button class="modal-btn" style="margin-top:8px" onclick="closeModal()">Cancel</button>
-  </div>
-</div>
 
 <script>
 function go(id){
@@ -706,8 +697,7 @@ function buildSecureStep(){
       sumDone:'Removed '+PASSKEYS[k].id,
       sumUndone:'Did not remove '+PASSKEYS[k].id,
       btn:'Remove',
-      done:'Removed',
-      confirm:'Do you want to remove '+PASSKEYS[k].id+'?'
+      done:'Removed'
     });
   });
   f.forEach(function(k){
@@ -717,8 +707,7 @@ function buildSecureStep(){
       sumDone:'Logged out of '+DEVICES[k].name.split(' · ')[0],
       sumUndone:'Did not log out of '+DEVICES[k].name.split(' · ')[0],
       btn:'Log out',
-      done:'Logged out',
-      confirm:'Do you want to log out '+DEVICES[k].name.split(' · ')[0]+'?'
+      done:'Logged out'
     });
   });
   addActionRow(host,{
@@ -759,7 +748,7 @@ function addActionRow(host,cfg){
   if(cfg.password){
     btn.onclick=function(){togglePwForm(btn);};
   } else {
-    btn.onclick=function(){confirmAction(btn,cfg.done,cfg.confirm);};
+    btn.onclick=function(){applyAction(btn,cfg.done);};
   }
   row.appendChild(main);row.appendChild(btn);
   host.appendChild(row);
@@ -882,35 +871,12 @@ function selAction(selId,otherId,indId){
   ind.className='sel-indicator show '+(isC?'c':'s');
 }
 
-var pendingBtn=null,pendingLabel=null;
-// The action is only applied after the participant confirms. The
-// caller supplies the question so it names the exact passkey/device.
-function confirmAction(btn,label,question){
-  pendingBtn=btn;
-  pendingLabel=label;
-  document.getElementById('modalText').textContent=
-    'A confirmation email will be sent to your email. '+
-    (question||'Do you want to take this action?');
-  document.getElementById('confirmModal').classList.add('show');
-}
-// Step 2: user confirms in the modal -> the action actually happens.
-function doConfirm(){
-  if(pendingBtn){
-    pendingBtn.textContent='✓ '+pendingLabel;
-    pendingBtn.style.backgroundColor='#f7f6f2';
-    pendingBtn.style.color='#98978f';
-    pendingBtn.style.border='1px solid #e4e3dd';
-    pendingBtn.style.cursor='default';
-    pendingBtn.onclick=null;
-    pendingBtn.classList.add('is-done');
-    pendingBtn.style.backgroundColor='';pendingBtn.style.color='';pendingBtn.style.border='';
-  }
-  pendingBtn=null;pendingLabel=null;
-  document.getElementById('confirmModal').classList.remove('show');
-}
-function closeModal(){
-  document.getElementById('confirmModal').classList.remove('show');
-  pendingBtn=null;pendingLabel=null;
+// Actions apply on click. The notice above the list already states that
+// a notification email follows, so there is no second confirmation step.
+function applyAction(btn,label){
+  btn.textContent='\u2713 '+label;
+  btn.classList.add('is-done');
+  btn.onclick=null;
 }
 function markDone(panelId,chevId,btn){
   btn.textContent='✓ Done';
@@ -926,7 +892,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=12"></script>
+<script src="study.js?v=13"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>
