@@ -332,11 +332,11 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <div class="gm-meta"><span>Aug 19, 2026, 2:34 PM (4 hours ago)</span><span>☆</span><span>↩</span><span>⋮</span></div>
   </div>
   <div class="e-content">
-    <div class="e-body">A new passkey was added to your account. This is the second passkey registered to your account. A passkey is a passwordless sign-in method that allows sign-in to your account without using the password.</div>
+    <div class="e-body">A new passkey, <span class="pk-id">Passkey #2</span>, was added to your account. This is the second passkey registered to your account. A passkey is a passwordless sign-in method that allows sign-in to your account without using the password.</div>
     <div class="e-card">
       <div><div class="e-dlabel">When</div><div class="e-dvalue">Aug 19, 2026 · 2:34 PM</div></div>
       <div><div class="e-dlabel">Device</div><div class="e-dvalue">Google Pixel · Android · Chrome</div></div>
-      <div><div class="e-dlabel">Passkey manager</div><div class="e-dvalue">Google Password Manager <span class="pk-id">Passkey #2</span></div></div>
+      <div><div class="e-dlabel">Passkey manager</div><div class="e-dvalue">Google Password Manager</div></div>
       <div><div class="e-dlabel">Location</div><div class="e-dvalue">New York, NY</div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
@@ -586,7 +586,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <!-- Tell people exactly what happens when they act -->
     <div class="notif-warn">
       <svg width="14" height="13" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
-      <div class="notif-warn-text">A confirmation email will be sent to the email registered with the account upon the completion of each action below.</div>
+      <div class="notif-warn-text">A notification email will be sent to <span class="em" data-u="alice" data-d="email.com"></span> with all the changes to your account after completion of the following actions.</div>
     </div>
 
     <div class="act-list" id="actionList"></div>
@@ -684,7 +684,7 @@ function flagged(){return ORDER.filter(function(k){return sessFlags[k];});}
 // reflect what the participant reported rather than a fixed script.
 function buildSecureStep(){
   var f=flagged();
-  var found='A new passkey, '+PASSKEYS.pixel.id+', was added to your account on '+PASSKEYS.pixel.created+'.';
+  var found='A new passkey, <span class="pk-id">'+PASSKEYS.pixel.id+'</span>, was added to your account on '+PASSKEYS.pixel.created+'.';
   if(f.length===0){
     found+=' You told us you recognise all of the logins on your account.';
   } else if(f.length===1){
@@ -692,7 +692,7 @@ function buildSecureStep(){
   } else {
     found+=' You told us you don\'t recognise these logins: '+f.map(function(k){return DEVICES[k].name.split(' · ')[0];}).join(' and ')+'.';
   }
-  document.getElementById('secureFound').textContent=found;
+  document.getElementById('secureFound').innerHTML=found;
 
   var host=document.getElementById('actionList');
   host.innerHTML='';
@@ -804,7 +804,7 @@ function buildSummary(){
     div.querySelector('.st-name').textContent=r.text;
     host.appendChild(div);
   });
-  document.getElementById('sumFound').textContent=document.getElementById('secureFound').textContent;
+  document.getElementById('sumFound').innerHTML=document.getElementById('secureFound').innerHTML;
 }
 
 var diagSel=null;
@@ -926,7 +926,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=11"></script>
+<script src="study.js?v=12"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>
