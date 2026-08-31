@@ -26,9 +26,14 @@ var Study = (function () {
   };
   var KEY = "asw-study-v1";
 
+  // The account email shown inside the mock (the Gmail header, and the
+  // Step 3 notice about the email that follows each action). Override
+  // per participant with ?email=... on their link.
+  var DEFAULT_EMAIL = "alice@email.com";
+
   // Bumped on every deploy. Appended to the pages we navigate to so a
   // participant who already visited never gets a stale cached copy.
-  var ASSET_V = "14";
+  var ASSET_V = "15";
   function v(file) { return file + (file.indexOf("?") < 0 ? "?v=" : "&v=") + ASSET_V; }
 
   /* ── session state ──────────────────────────────────────── */
@@ -57,9 +62,25 @@ var Study = (function () {
       part: 0,
       test: false,
       startedAt: new Date().toISOString(),
+      email: "",
       events: [],
       sent: 0
     };
+  }
+
+  function accountEmail() {
+    return (state && state.email) || DEFAULT_EMAIL;
+  }
+
+  // Writes the account email into the mock. Uses textContent, so a value
+  // supplied in the URL is inserted as text and never as markup.
+  function applyAccountEmail() {
+    var em = accountEmail(), i;
+    var slots = document.querySelectorAll(".em");
+    for (i = 0; i < slots.length; i++) slots[i].textContent = em;
+    var avatars = document.querySelectorAll(".gm-avatar");
+    var initial = em.charAt(0).toUpperCase();
+    for (i = 0; i < avatars.length; i++) avatars[i].textContent = initial;
   }
 
   /* ── event logging ──────────────────────────────────────── */
@@ -189,11 +210,13 @@ var Study = (function () {
       page = "part1";
       var pid = getParam("pid");
       var w = getParam("w").toUpperCase();
+      var mail = getParam("email");
       var s = loadState();
       var samePerson = s && !s.test && (!pid || pid === s.pid);
       if (samePerson && s.part === 0 && s.events.length) {
         // Re-opened the part-1 link mid-walkthrough: resume, don't wipe.
         state = s;
+        if (mail) state.email = mail;
         log("study", "part1_resumed", null);
         saveState();
         flush();
@@ -203,6 +226,7 @@ var Study = (function () {
       if (samePerson && s.part === 1) { location.replace(v("interlude.html")); return; }
       if (samePerson && s.part >= 2 && pid) { location.replace(v("done.html")); return; }
       state = newState(pid, WIZARDS[w] ? w : "");
+      if (mail) state.email = mail;
       log("study", "begin", {
         order: state.order.map(function (c) { return WIZARDS[c].label; }),
         userAgent: navigator.userAgent,
@@ -220,11 +244,13 @@ var Study = (function () {
       page = "part2";
       var pid = getParam("pid");
       var w = getParam("w").toUpperCase();
+      var mail = getParam("email");
       var s = loadState();
       var samePerson = s && !s.test && (!pid || pid === s.pid);
       if (samePerson && s.part >= 2) { location.replace(v("done.html")); return; }
       if (samePerson) {
         state = s;
+        if (mail) state.email = mail;
         if (state.part === 0) log("study", "part2_opened_before_part1_finished", null);
         state.part = 1;
         log("study", "part2_started", null);
@@ -237,6 +263,7 @@ var Study = (function () {
       // reconstruct one so part 2 still runs, flagged for analysis.
       var second = WIZARDS[w] ? w : (Math.random() < 0.5 ? "A" : "B");
       state = newState(pid, second === "A" ? "B" : "A");
+      if (mail) state.email = mail;
       state.part = 1;
       log("study", "part2_without_part1_state", {
         order: state.order.map(function (c) { return WIZARDS[c].label; })
@@ -265,6 +292,7 @@ var Study = (function () {
       }
       log("wizard", "start", { wizard: WIZARDS[code].label, part: state.part + 1 });
       saveState();
+      applyAccountEmail();
       installHooks();
     },
 
