@@ -33,7 +33,7 @@ var Study = (function () {
 
   // Bumped on every deploy. Appended to the pages we navigate to so a
   // participant who already visited never gets a stale cached copy.
-  var ASSET_V = "15";
+  var ASSET_V = "16";
   function v(file) { return file + (file.indexOf("?") < 0 ? "?v=" : "&v=") + ASSET_V; }
 
   /* ── session state ──────────────────────────────────────── */
@@ -66,6 +66,18 @@ var Study = (function () {
       events: [],
       sent: 0
     };
+  }
+
+  // Whether a stored session belongs to the person this link is for.
+  // A different pid or a different account email means a different
+  // participant, so we start over rather than resuming theirs.
+  // ?restart=1 forces a fresh session — useful when re-testing a link.
+  function sameSession(s, pid, mail) {
+    if (!s || s.test) return false;
+    if (getParam("restart")) return false;
+    if (pid && pid !== s.pid) return false;
+    if (mail && mail !== (s.email || "")) return false;
+    return true;
   }
 
   function accountEmail() {
@@ -212,7 +224,7 @@ var Study = (function () {
       var w = getParam("w").toUpperCase();
       var mail = getParam("email");
       var s = loadState();
-      var samePerson = s && !s.test && (!pid || pid === s.pid);
+      var samePerson = sameSession(s, pid, mail);
       if (samePerson && s.part === 0 && s.events.length) {
         // Re-opened the part-1 link mid-walkthrough: resume, don't wipe.
         state = s;
@@ -246,7 +258,7 @@ var Study = (function () {
       var w = getParam("w").toUpperCase();
       var mail = getParam("email");
       var s = loadState();
-      var samePerson = s && !s.test && (!pid || pid === s.pid);
+      var samePerson = sameSession(s, pid, mail);
       if (samePerson && s.part >= 2) { location.replace(v("done.html")); return; }
       if (samePerson) {
         state = s;
