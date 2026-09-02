@@ -33,7 +33,7 @@ var Study = (function () {
 
   // Bumped on every deploy. Appended to the pages we navigate to so a
   // participant who already visited never gets a stale cached copy.
-  var ASSET_V = "16";
+  var ASSET_V = "17";
   function v(file) { return file + (file.indexOf("?") < 0 ? "?v=" : "&v=") + ASSET_V; }
 
   /* ── session state ──────────────────────────────────────── */
