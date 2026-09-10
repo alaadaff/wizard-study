@@ -28,10 +28,10 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .page-title{font-family:'DM Serif Display',serif;font-size:22px;color:#1c1c1a;line-height:1.2;margin-bottom:5px}
 .page-sub{font-size:13px;color:#58584f;line-height:1.6}
 .body{padding:16px 22px;display:flex;flex-direction:column;gap:14px}
-.btn{width:50%;min-width:240px;margin:0 auto;padding:12px;border-radius:8px;border:1px solid #d0cfc8;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;cursor:pointer;text-align:center;background-color:#ffffff;color:#1c1c1a}
-.btn:hover{background:#f7f6f2}
-.btn-secondary{background-color:#ffffff;color:#1c1c1a;border:1px solid #d0cfc8}
-.btn-ghost{background-color:#ffffff;color:#1c1c1a;border:1px solid #d0cfc8}
+.btn{width:50%;min-width:240px;margin:0 auto;padding:12px;border-radius:8px;border:1px solid #1a73e8;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;cursor:pointer;text-align:center;background-color:#ffffff;color:#1a73e8}
+.btn:hover{background:#e8f0fe}
+.btn-secondary{background-color:#ffffff;color:#1a73e8;border:1px solid #1a73e8}
+.btn-ghost{background-color:#ffffff;color:#1a73e8;border:1px solid #1a73e8}
 .btn-row{display:flex;flex-direction:column;gap:8px}.btn-row .btn{flex:none}
 .foot-stack{width:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
 .foot-stack .btn{width:100%;min-width:0;margin:0}
@@ -101,9 +101,9 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 /* "Was this you?" — asked at the end of an expanded login */
 .wty-row{display:flex;align-items:center;gap:10px;padding:13px 14px;border-top:1px solid #e4e3dd;background:#f7f6f2}
 .wty-label{flex:1;font-size:13px;font-weight:600;color:#1c1c1a}
-.wty-btn{padding:7px 20px;border-radius:7px;border:1px solid #d0cfc8;background:#fff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer}
-.wty-btn:hover{background:#eeede8}
-.wty-btn.sel{background:#1c1c1a;border-color:#1c1c1a;color:#fff}
+.wty-btn{padding:7px 20px;border-radius:7px;border:1px solid #1a73e8;background:#fff;color:#1a73e8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer}
+.wty-btn:hover{background:#e8f0fe}
+.wty-btn.sel{background:#1a73e8;border-color:#1a73e8;color:#fff}
 /* Login that produced the alert */
 .src-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:#1c1c1a;color:#fff;white-space:nowrap;margin-left:8px}
 .session-card.is-source{border-color:#1c1c1a}
@@ -158,7 +158,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .pw-label{font-size:12px;font-weight:500;color:#58584f;margin-bottom:5px}
 .pw-input{width:100%;padding:11px 13px;border-radius:8px;border:1px solid #d0cfc8;font-family:'DM Sans',sans-serif;font-size:13px;color:#1c1c1a;background:#fff;outline:none}
 .pw-input:focus{border-color:#1c1c1a}
-.pw-btn{width:100%;padding:12px;border-radius:8px;border:1px solid #d0cfc8;background:#fff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;margin-top:4px}
+.pw-btn{width:100%;padding:12px;border-radius:8px;border:1px solid #1a73e8;background:#fff;color:#1a73e8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;margin-top:4px}
 .pw-empty{font-size:12px;color:#98978f;padding:4px 2px;line-height:1.5}
 .settings-title{font-size:15px;font-weight:600;color:#1c1c1a;margin-bottom:3px}
 .settings-sub{font-size:12px;color:#98978f;margin-bottom:14px}
@@ -173,7 +173,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 .so-info{flex:1;min-width:0}
 .so-name{font-size:13px;font-weight:500;color:#1c1c1a}
 .so-meta{font-size:11px;color:#98978f;margin-top:1px}
-.so-btn{padding:7px 14px;border-radius:7px;border:1px solid #d0cfc8;background-color:#ffffff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.so-btn{padding:7px 14px;border-radius:7px;border:1px solid #1a73e8;background-color:#ffffff;color:#1a73e8;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
 
 /* Passkey identifier — service-assigned label, shown everywhere the passkey appears */
 .pk-id{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:20px;background:#eeede8;color:#58584f;border:1px solid #d0cfc8;white-space:nowrap}
@@ -181,16 +181,18 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
 /* Flat remediation list (Step 3) */
 .act-list{border:1px solid #e4e3dd;border-radius:10px;overflow:hidden}
 .act-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #e4e3dd;background:#fff}
+.act-num{width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid #d0cfc8;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#58584f;flex-shrink:0}
+.act-icon{width:30px;height:30px;border-radius:7px;background:#f7f6f2;border:1px solid #e4e3dd;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .act-row:last-child{border-bottom:none}
 .act-row-main{flex:1;min-width:0}
 .act-row-title{font-size:14px;color:#1c1c1a;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.act-row-btn{padding:8px 18px;border-radius:7px;border:1px solid #d0cfc8;background:#fff;color:#1c1c1a;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
-.act-row-btn:hover{background:#f7f6f2}
-.act-row-btn.is-done{background:#f7f6f2;color:#98978f;cursor:default}
+.act-row-btn{padding:8px 18px;border-radius:7px;border:1px solid #1a73e8;background:#fff;color:#1a73e8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.act-row-btn:hover{background:#e8f0fe}
+.act-row-btn.is-done{background:#f7f6f2;color:#98978f;border-color:#e4e3dd;cursor:default}
 .act-empty{padding:14px 16px;font-size:12px;color:#98978f;line-height:1.55;background:#fff}
 
 /* What happens next — notification warning */
-.notif-warn{display:flex;gap:8px;align-items:flex-start;background:#fffbf0;border:1px solid #e8d88a;border-radius:8px;padding:9px 12px}
+.notif-warn{display:flex;gap:8px;align-items:flex-start;padding:2px 2px 0}
 .notif-warn-text{font-size:12px;color:#58584f;line-height:1.5}
 
 /* Inline password form inside the flat list */
@@ -484,8 +486,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="footer">
     <div class="foot-stack">
       <div class="btn-pair">
-        <button class="btn" onclick="go('s5-secure')">Continue to secure my account →</button>
         <button class="btn">Export findings</button>
+        <button class="btn" onclick="go('s5-secure')">Continue to secure my account →</button>
       </div>
       <button class="btn">Exit wizard</button>
     </div>
@@ -586,7 +588,7 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
     <!-- Tell people exactly what happens when they act -->
     <div class="notif-warn">
       <svg width="14" height="13" viewBox="0 0 16 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M8 1L15 14H1L8 1Z" fill="#f5c842" stroke="#c9a800" stroke-width="1" stroke-linejoin="round"/><text x="8" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#7a5c00" font-family="sans-serif">!</text></svg>
-      <div class="notif-warn-text">A notification email will be sent to <span class="em" data-u="alice" data-d="email.com"></span> with all the changes to your account after completion of the following actions.</div>
+      <div class="notif-warn-text">A notification email will be sent to <span class="em" data-u="alice" data-d="email.com"></span> with the set of actions you complete.</div>
     </div>
 
     <div class="act-list" id="actionList"></div>
@@ -604,8 +606,8 @@ html,body{font-family:'DM Sans',sans-serif;background:#ece9e3;min-height:100vh;c
   <div class="footer">
     <div class="foot-stack">
       <div class="btn-pair">
-        <button class="btn" onclick="go('s6-summary')">Proceed to summary →</button>
         <button class="btn">Export findings</button>
+        <button class="btn" onclick="go('s6-summary')">Proceed to summary →</button>
       </div>
       <button class="btn">Exit wizard</button>
     </div>
@@ -658,9 +660,15 @@ var PASSKEYS={
   macbook:{id:'Passkey #1',mgr:'iCloud Keychain',created:'Jul 28, 2026, 3:20 PM'},
   pixel:  {id:'Passkey #2',mgr:'Google Password Manager',created:'Aug 19, 2026, 2:34 PM'}
 };
+var ICONS={
+  android:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zm-2.5-10C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C7.08 3.04 6 4.64 6 6.5h12c0-1.86-1.08-3.46-2.47-4.34zM10 5H9V4h1v1zm5 0h-1V4h1v1z" fill="#3ddc84"/></svg>',
+  laptop:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="#555"/></svg>',
+  key:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 10h-8.35C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H13l2 2 2-2 2 2 4-4.04L21 10zM7 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="#555"/></svg>',
+  lock:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm3 8H9V6a3 3 0 1 1 6 0v3z" fill="#555"/></svg>'
+};
 var DEVICES={
-  pixel:  {name:'Google Pixel · Android · Chrome',range:'Aug 19th – now',status:'Currently active'},
-  macbook:{name:'MacBook Pro · macOS · Chrome',range:'Jul 28th – Jul 30th, 2026',status:'Logged out'}
+  pixel:  {name:'Google Pixel · Android · Chrome',range:'Aug 19th – now',status:'Currently active',icon:'android'},
+  macbook:{name:'MacBook Pro · macOS · Chrome',range:'Jul 28th – Jul 30th, 2026',status:'Logged out',icon:'laptop'}
 };
 var ORDER=['pixel','macbook'];
 
@@ -694,6 +702,7 @@ function buildSecureStep(){
       key:'pk-'+k,
       title:'Remove passkey',
       chip:PASSKEYS[k].id,
+      icon:'key',
       sumDone:'Removed '+PASSKEYS[k].id,
       sumUndone:'Did not remove '+PASSKEYS[k].id,
       btn:'Remove',
@@ -704,6 +713,7 @@ function buildSecureStep(){
     addActionRow(host,{
       key:'dev-'+k,
       title:'Log out '+DEVICES[k].name,
+      icon:DEVICES[k].icon,
       sumDone:'Logged out of '+DEVICES[k].name.split(' · ')[0],
       sumUndone:'Did not log out of '+DEVICES[k].name.split(' · ')[0],
       btn:'Log out',
@@ -713,6 +723,7 @@ function buildSecureStep(){
   addActionRow(host,{
     key:'pw',
     title:'Change password',
+    icon:'lock',
     btn:'Change',
     done:'Password changed',
     password:true
@@ -731,6 +742,16 @@ function addActionRow(host,cfg){
   row.setAttribute('data-key',cfg.key);
   if(cfg.sumDone)row.setAttribute('data-sum-done',cfg.sumDone);
   if(cfg.sumUndone)row.setAttribute('data-sum-undone',cfg.sumUndone);
+  var num=document.createElement('div');
+  num.className='act-num';
+  num.textContent=String(host.querySelectorAll('.act-row').length + 1);
+  row.appendChild(num);
+  if(cfg.icon && ICONS[cfg.icon]){
+    var ic=document.createElement('div');
+    ic.className='act-icon';
+    ic.innerHTML=ICONS[cfg.icon];
+    row.appendChild(ic);
+  }
   var main=document.createElement('div');
   main.className='act-row-main';
   var t=document.createElement('div');
@@ -892,7 +913,7 @@ document.querySelectorAll('.em').forEach(function(el){
   el.textContent = el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
 });
 </script>
-<script src="study.js?v=17"></script>
+<script src="study.js?v=18"></script>
 <script>Study.initWizard("B");</script>
 </body>
 </html>
